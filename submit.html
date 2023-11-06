@@ -1,51 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timesheet Entry Form</title>
-<!-- Include Tailwind CSS from CDN for simplicity -->
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<style>
-  .container {
-    margin-top: 2rem;
-  }
-</style>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Timesheet Entry Form</title>
+        <!-- Include Tailwind CSS from CDN for simplicity -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <style>
+            .container {
+                margin-top: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6">Timesheet Entry</h2>
+            <form id="timesheetForm" class="max-w-lg mx-auto">
+                <div class="mb-4">
+                    <label
+                        for="dateDay"
+                        class="block text-sm font-medium text-gray-700"
+                        >Day</label
+                    >
+                    <select
+                        class="form-select block w-full mt-1 rounded-md border-gray-300 shadow-sm"
+                        id="dateDay"
+                    ></select>
+                </div>
+                <div class="mb-4">
+                    <label
+                        for="dateMonth"
+                        class="block text-sm font-medium text-gray-700"
+                        >Month</label
+                    >
+                    <select
+                        class="form-select block w-full mt-1 rounded-md border-gray-300 shadow-sm"
+                        id="dateMonth"
+                    ></select>
+                </div>
+                <div class="mb-4">
+                    <label
+                        for="dateYear"
+                        class="block text-sm font-medium text-gray-700"
+                        >Year</label
+                    >
+                    <select
+                        class="form-select block w-full mt-1 rounded-md border-gray-300 shadow-sm"
+                        id="dateYear"
+                    ></select>
+                </div>
+                <div class="mb-4">
+                    <label
+                        for="startTime"
+                        class="block text-sm font-medium text-gray-700"
+                        >Start Time</label
+                    >
+                    <input
+                        type="time"
+                        class="form-input block w-full mt-1 rounded-md border-gray-300 shadow-sm"
+                        id="startTime"
+                        required
+                    />
+                </div>
+                <div class="mb-4">
+                    <label
+                        for="endTime"
+                        class="block text-sm font-medium text-gray-700"
+                        >End Time</label
+                    >
+                    <input
+                        type="time"
+                        class="form-input block w-full mt-1 rounded-md border-gray-300 shadow-sm"
+                        id="endTime"
+                        required
+                    />
+                </div>
+                <div class="mb-6">
+                    <label
+                        for="breakTime"
+                        class="block text-sm font-medium text-gray-700"
+                        >Break Duration (minutes)</label
+                    >
+                    <input
+                        type="number"
+                        class="form-input block w-full mt-1 rounded-md border-gray-300 shadow-sm"
+                        id="breakTime"
+                        placeholder="Enter break duration in minutes"
+                        required
+                    />
+                </div>
+                <button
+                    type="submit"
+                    class="w-full btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
 
-<div class="container mx-auto px-4">
-  <h2 class="text-2xl font-bold mb-6">Timesheet Entry</h2>
-  <form id="timesheetForm" class="max-w-lg mx-auto">
-    <div class="mb-4">
-      <label for="dateDay" class="block text-sm font-medium text-gray-700">Day</label>
-      <select class="form-select block w-full mt-1 rounded-md border-gray-300 shadow-sm" id="dateDay"></select>
-    </div>
-    <div class="mb-4">
-      <label for="dateMonth" class="block text-sm font-medium text-gray-700">Month</label>
-      <select class="form-select block w-full mt-1 rounded-md border-gray-300 shadow-sm" id="dateMonth"></select>
-    </div>
-    <div class="mb-4">
-      <label for="dateYear" class="block text-sm font-medium text-gray-700">Year</label>
-      <select class="form-select block w-full mt-1 rounded-md border-gray-300 shadow-sm" id="dateYear"></select>
-    </div>
-    <div class="mb-4">
-      <label for="startTime" class="block text-sm font-medium text-gray-700">Start Time</label>
-      <input type="time" class="form-input block w-full mt-1 rounded-md border-gray-300 shadow-sm" id="startTime" required>
-    </div>
-    <div class="mb-4">
-      <label for="endTime" class="block text-sm font-medium text-gray-700">End Time</label>
-      <input type="time" class="form-input block w-full mt-1 rounded-md border-gray-300 shadow-sm" id="endTime" required>
-    </div>
-    <div class="mb-6">
-      <label for="breakTime" class="block text-sm font-medium text-gray-700">Break Duration (minutes)</label>
-      <input type="number" class="form-input block w-full mt-1 rounded-md border-gray-300 shadow-sm" id="breakTime" placeholder="Enter break duration in minutes" required>
-    </div>
-    <button type="submit" class="w-full btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
-  </form>
-</div>
-
-<script src="js/submit.js"></script>
-
-</body>
+        <script src="js/submit.js"></script>
+    </body>
 </html>
