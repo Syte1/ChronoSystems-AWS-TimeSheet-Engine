@@ -3,6 +3,12 @@
 
 
 # POST request submissions
+
+## url path
+```
+/postEmployeeTimesheet
+```
+
 ## Request body schema
 ```json
 {
@@ -308,6 +314,11 @@
 ```
 
 # GET Request
+
+## url path
+```
+/getEmployeeTimesheet
+```
 ## Query params
 ```
 start_date=value1&end_date=value2&uid=value3
