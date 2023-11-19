@@ -205,7 +205,7 @@
 ### Response to Duplicate date submission
 ```json
 {
-  "statusCode": 401,
+  "statusCode": 400,
   "message": "Failure, timesheet contains duplicate dates. Re-submit timesheet with corrections."
 }
 ```
@@ -290,7 +290,7 @@
 ### Response to Type Error in submission
 ```json
 {
-  "statusCode": 401,
+  "statusCode": 400,
   "message": "Failure, timesheet has invalid entries. Re-submit timesheet with corrections.",
   "invalid_entries": [
     {
@@ -326,6 +326,7 @@ start_date=value1&end_date=value2&uid=value3
 
 ## Valid GET Request
 EncodeURIComponent() for dates:
+Date range is: 11/01/2023 - 11/15/2023
 ```
 getEmployeeTimesheet?start_date=11%2F01%2F2023&end_date=11%2F15%2F2023&uid=1
 ```
@@ -428,7 +429,7 @@ getEmployeeTimesheet?start_date=11%2F01%2F2023&end_date=11%2F15%2F2023&uid=1
 ### Response to invalid GET request
 ```json
 {
-    "statusCode": 401,
+    "statusCode": 400,
     "message": "Failure, invalid date range."
 }
 ```

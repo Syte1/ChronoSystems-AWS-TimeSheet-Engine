@@ -8,32 +8,40 @@ dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(TABLE_NAME)
 
 def lambda_handler(event, context):
-    submissions = event["submission"]
-    valid_submission = validateTimesheet(submissions)
-    invalid_entries = calculateNetHours(submissions)
-    
-    if valid_submission and not invalid_entries:
-        try:
-            addSubmissionsToDynamoDb(submissions)
+    try:
+        submissions = event["submission"]
+        valid_submission = validateTimesheet(submissions)
+        invalid_entries = calculateNetHours(submissions)
+        
+        if valid_submission and not invalid_entries:
+            try:
+                addSubmissionsToDynamoDb(submissions)
+                return {
+                    'statusCode': 200,
+                    'message': 'Success, timesheet successfully processed.'
+                }
+            except Exception as err:
+                return {
+                    'statusCode': 500,
+                    'message': 'Failure, The server has encountered a situation it does not know how to handle.'
+                }
+        elif not valid_submission:
             return {
-                'statusCode': 200,
-                'message': 'Success, timesheet successfully processed.'
+                'statusCode': 400,
+                'message': 'Failure, timesheet contains duplicate dates. Re-submit timesheet with corrections.'
             }
-        except Exception as err:
+        elif invalid_entries:
             return {
-                'statusCode': 500,
-                'message': 'Failure, The server has encountered a situation it does not know how to handle.'
+                'statusCode': 400,
+                'message' : 'Failure, timesheet has invalid entries. Re-submit timesheet with corrections.',
+                'invalid_entries': invalid_entries
             }
-    elif not valid_submission:
+    except Exception as err:
+        print(f"Error occured in PostEmployeeSheet LambdaHandler: {err}")
         return {
-            'statusCode': 401,
-            'message': 'Failure, timesheet contains duplicate dates. Re-submit timesheet with corrections.'
-        }
-    elif invalid_entries:
-        return {
-            'statusCode': 401,
-            'message' : 'Failure, timesheet has invalid entries. Re-submit timesheet with corrections.',
-            'invalid_entries': invalid_entries
+            'statusCode': 500,
+            'message': "Failure, The server has encountered a situation it does not know how to handle.",
+            'error': "Internal error."
         }
     
     
@@ -63,6 +71,9 @@ def calculateNetHours(submissions: list) -> list:
             submission["error"] = str(err)
             invalid_entries.append(submission)
             continue
+        except Exception as err:
+            submission["error"] = str(err)
+            invalid_entries.append(submission)
     return invalid_entries
     
 def addSubmissionsToDynamoDb(submissions: list):
