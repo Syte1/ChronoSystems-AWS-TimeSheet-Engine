@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border:1px solid #ddd;
+        }
+        tr:nth-child(even) {background-color: #f2f2f2;}
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>My Timesheets</h2>
+    <table id="dataTable">
+        <tr>
+            <th>Break Duration</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>UID</th>
+            <th>Net Time</th>
+        </tr>
+    </table>
+<script>
+    //Hard coded uid for now
+    fetch('https://oxtwzrrqrg.execute-api.us-west-2.amazonaws.com/development/getEmployeeTimesheet?start_date=11%2F01%2F2023&end_date=11%2F15%2F2023&uid=1')
+        .then(response => response.json())
+        .then(data => {
+            var entries = JSON.parse(data.entries);
+            var table = document.getElementById('dataTable');
+            for (var i = 0; i < entries.length; i++){
+                var row = `<tr>
+                                <td>${entries[i].break_duration}</td>
+                                <td>${entries[i].date}</td>
+                                <td>${entries[i].start_time}</td>
+                                <td>${entries[i].end_time}</td>
+                                <td>${entries[i].uid}</td>
+                                <td>${entries[i].net_time}</td>
+                           </tr>`
+                table.innerHTML += row;
+            }
+        })
+        .catch(error => console.error('Error:', error));
+</script>
+</body>
+</html>
