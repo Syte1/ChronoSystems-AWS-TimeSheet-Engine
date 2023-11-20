@@ -106,16 +106,52 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
 
             const postData = {
-                date: {
-                    day: document.getElementById("dateDay").value,
-                    month: document.getElementById("dateMonth").value,
-                    year: document.getElementById("dateYear").value,
-                },
-                startTime: document.getElementById("startTime").value,
-                endTime: document.getElementById("endTime").value,
-                breakTime: document.getElementById("breakTime").value,
+                "submission": [
+                    {
+                        uid : "0b6d5c32-6644-4629-a478-e82b52749cbc",
+                        date: {
+                            day: document.getElementById("dateDay").value,
+                            month: document.getElementById("dateMonth").value,
+                            year: document.getElementById("dateYear").value,
+                        },
+                        date: `${document.getElementById("dateMonth").value}/${document.getElementById("dateDay").value}/${document.getElementById("dateYear").value}`,
+                        start_time: document.getElementById("startTime").value + " AM",
+                        end_time: document.getElementById("endTime").value + " PM", 
+                        break_duration: parseInt(document.getElementById("breakTime").value),
+                    }
+                ]
             };
 
             console.log("Data ready to be sent to API:", postData);
+
+            const url = `https://oxtwzrrqrg.execute-api.us-west-2.amazonaws.com/development/postEmployeeTimesheet`;
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(postData),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error(
+                            `HTTP error! status: ${response.status}`
+                        );
+                    }
+                })
+                .then((data) => {
+                    console.log("Success:", data);
+                    document.getElementById("timesheetForm").reset();
+                    document.getElementById("successMessage").style.display =
+                        "block";
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    document.getElementById("errorMessage").style.display =
+                        "block";
+                });
         });
 });

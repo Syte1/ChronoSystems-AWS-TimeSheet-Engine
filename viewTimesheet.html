@@ -31,7 +31,8 @@
     </table>
 <script>
     //Hard coded uid for now
-    fetch('https://oxtwzrrqrg.execute-api.us-west-2.amazonaws.com/development/getEmployeeTimesheet?start_date=11%2F01%2F2023&end_date=11%2F15%2F2023&uid=1')
+    const uid = "0b6d5c32-6644-4629-a478-e82b52749cbc";
+    fetch(`https://oxtwzrrqrg.execute-api.us-west-2.amazonaws.com/development/getEmployeeTimesheet?start_date=10%2F01%2F2023&end_date=11%2F30%2F2023&uid=${uid}`)
         .then(response => response.json())
         .then(data => {
             var entries = JSON.parse(data.entries);
