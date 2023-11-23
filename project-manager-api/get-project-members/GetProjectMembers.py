@@ -1,5 +1,6 @@
 import os
 import boto3
+from boto3.dynamodb.conditions import Key
 
 TABLE_NAME = os.environ.get('TABLE_NAME', 'comp4968-project-members')
 PARTITION_KEY = "projectId"
@@ -9,11 +10,11 @@ table = dynamodb.Table(TABLE_NAME)
 
 def lambda_handler(event, context):
     try:
-        projectId = event["projectId"]
+        projectId = event["params"]["querystring"]["projectId"]
         items = getProjectMembers(projectId)
         return {
             "statusCode": 200,
-            "projects": items
+            "members": items
         }
     except KeyError as err:
         print(f"Error occured in GetProjectMembers.py LambdaHandler: {err}")

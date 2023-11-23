@@ -1,5 +1,6 @@
 import os
 import boto3
+from boto3.dynamodb.conditions import Key
 
 TABLE_NAME = os.environ.get('TABLE_NAME', 'comp4968-project-members')
 SORT_KEY = "uid"
@@ -9,7 +10,7 @@ table = dynamodb.Table(TABLE_NAME)
 
 def lambda_handler(event, context):
     try:
-        uid = event["uid"]
+        uid = event["params"]["querystring"]["uid"]
         items = getAssignedProjects(uid)
         return {
             "statusCode": 200,
