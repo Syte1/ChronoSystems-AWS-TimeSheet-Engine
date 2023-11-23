@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form button {
+            width: calc(100% - 22px);
+            /* Adjusting for padding and border */
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            /* Ensures padding doesn't affect overall width */
+        }
+
+        form button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #4cae4c;
+        }
+
+        .table-container {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Employee Paystub Search</h2>
+        <!-- Form for input -->
+        <form id="searchForm">
+            <label for="employeeId">Employee ID:</label>
+            <input type="text" id="employeeId" placeholder="Enter Employee ID">
+
+            <label for="startDate">Start Period:</label>
+            <input type="date" id="startDate">
+
+            <label for="endDate">End Period:</label>
+            <input type="date" id="endDate">
+
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Separate container for the table -->
+    <div class="table-container">
+        <!-- Timesheet table -->
+        <table id="dataTable">
+            <tr>
+                <th>Employee ID</th>
+                <th>Start Period</th>
+                <th>End Period</th>
+                <th>Pay</th>
+            </tr>
+            <!-- Table rows will be populated here -->
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const employeeId = document.getElementById('employeeId').value;
+            const startDate = convertDateFormat(document.getElementById('startDate').value);
+            const endDate = convertDateFormat(document.getElementById('endDate').value);
+
+            let apiUrl = `https://s2z6h094ph.execute-api.us-west-2.amazonaws.com/test?uid=${employeeId}`;
+            if (startDate) apiUrl += `&start_period=${startDate}`;
+            if (endDate) apiUrl += `&end_period=${endDate}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    try {
+                        if (data) {
+                            updateTable([data]); // Pass an array with the single object
+                        } else {
+                            console.error('No data found in response');
+                        }
+                    } catch (e) {
+                        console.error('Error processing data:', e);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        // Function to convert date format
+        function convertDateFormat(dateString) {
+            if (dateString) {
+                const [year, month, day] = dateString.split('-');
+                return `${month}/${day}/${year}`;
+            } else {
+                return '';
+            }
+        }
+
+        function updateTable(entries) {
+            console.log(entries); // Log the entries for debugging
+            const table = document.getElementById('dataTable');
+            table.innerHTML = table.rows[0].innerHTML; // Clear existing rows except the header
+
+            entries.forEach(entry => {
+                if (entry) {
+                    var row = `<tr>
+                           <td>${entry.uid || 'N/A'}</td>
+                           <td>${entry.start_period || 'N/A'}</td>
+                           <td>${entry.end_period || 'N/A'}</td>
+                           <td>${entry.pay || 'N/A'}</td>
+                       </tr>`;
+                    table.innerHTML += row;
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
