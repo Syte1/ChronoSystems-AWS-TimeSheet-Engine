@@ -14,17 +14,11 @@ def lambda_handler(event, context):
         invalid_entries = calculateNetHours(submissions)
         
         if valid_submission and not invalid_entries:
-            try:
-                addSubmissionsToDynamoDb(submissions)
-                return {
-                    'statusCode': 200,
-                    'message': 'Success, timesheet successfully processed.'
-                }
-            except Exception as err:
-                return {
-                    'statusCode': 500,
-                    'message': 'Failure, The server has encountered a situation it does not know how to handle.'
-                }
+            addSubmissionsToDynamoDb(submissions)
+            return {
+                'statusCode': 200,
+                'message': 'Success, timesheet successfully processed.'
+            }
         elif not valid_submission:
             return {
                 'statusCode': 400,
