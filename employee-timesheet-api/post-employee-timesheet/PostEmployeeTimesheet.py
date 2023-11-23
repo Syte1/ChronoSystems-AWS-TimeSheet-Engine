@@ -8,12 +8,12 @@ TABLE_NAME = os.environ.get('TABLE_NAME', 'comp4968-timesheet')
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(TABLE_NAME)
 
-def lambda_handler(event, context):
-    submissions = event["submission"]
-    valid_submission = validateTimesheet(submissions)
-    invalid_entries = calculateNetHours(submissions)
-    
+def lambda_handler(event, context):    
     try:
+        submissions = event["submission"]
+        valid_submission = validateTimesheet(submissions)
+        invalid_entries = calculateNetHours(submissions)
+        
         if valid_submission and not invalid_entries:
             addSubmissionsToDynamoDb(submissions)
             return {
