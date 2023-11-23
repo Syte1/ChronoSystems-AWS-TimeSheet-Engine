@@ -1,4 +1,5 @@
 import os
+import json
 import boto3
 from datetime import datetime, timedelta
 from NegativeNumberError import NegativeNumberError
@@ -8,11 +9,11 @@ dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(TABLE_NAME)
 
 def lambda_handler(event, context):
+    submissions = event["submission"]
+    valid_submission = validateTimesheet(submissions)
+    invalid_entries = calculateNetHours(submissions)
+    
     try:
-        submissions = event["submission"]
-        valid_submission = validateTimesheet(submissions)
-        invalid_entries = calculateNetHours(submissions)
-        
         if valid_submission and not invalid_entries:
             addSubmissionsToDynamoDb(submissions)
             return {
@@ -62,10 +63,6 @@ def calculateNetHours(submissions: list) -> list:
             invalid_entries.append(submission)
             continue
         except NegativeNumberError as err:
-            submission["error"] = str(err)
-            invalid_entries.append(submission)
-            continue
-        except Exception as err:
             submission["error"] = str(err)
             invalid_entries.append(submission)
     return invalid_entries
