@@ -1,24 +1,15 @@
-<style>
-    :root {
-        --main-color: #4a76a8;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    .bg-main-color {
-        background-color: var(--main-color);
-    }
-
-    .text-main-color {
-        color: var(--main-color);
-    }
-
-    .border-main-color {
-        border-color: var(--main-color);
-    }
-</style>
-<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-
-<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="../js/profile.js" defer></script>
+    <link rel="stylesheet" href="../styles/profile.css">
+    <title>Document</title>
+</head>
 
 <body>
     <div class="bg-gray-100">
@@ -87,7 +78,7 @@
                     <!-- Profile Card -->
                     <div class="bg-white p-3 border-t-4 border-green-400">
                         <div class="image overflow-hidden">
-                            <img class="h-auto w-full mx-auto" src="images/cat.jpg" alt="catty">
+                            <img class="h-auto w-full mx-auto" src="../images/cat.jpg" alt="catty">
                         </div>
                         <h1 class="text-gray-900 font-bold text-xl leading-8 my-1" id="user-name2">Set</h1>
                         <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
@@ -129,43 +120,55 @@
                             <div class="grid md:grid-cols-2 text-sm">
                                 <div class="grid grid-cols-2">
                                     <div class="px-4 py-2 font-semibold">First Name</div>
-                                    <div class="px-4 py-2" id="user-firstname">Fname</div>
+                                    <div class="px-4 py-2" id="current-name">Fname</div>
                                 </div>
                                 <div class="grid grid-cols-2">
                                     <div class="px-4 py-2 font-semibold">Last Name</div>
-                                    <div class="px-4 py-2" id="user-lastname">Lname</div>
+                                    <div class="px-4 py-2" id="current-lname">Lname</div>
                                 </div>
                                 <div class="grid grid-cols-2">
                                     <div class="px-4 py-2 font-semibold">Role</div>
                                     <div class="px-4 py-2" id="user-role"> <span id="current-role">Role</span></div>
-                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="editField('role')">Edit</button>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        onclick="editField('role')">Edit</button>
                                 </div>
                                 <div class="grid grid-cols-2">
                                     <div class="px-4 py-2 font-semibold">Contact No.</div>
-                                    <div class="px-4 py-2">+11 998001001</div>
+                                    <div class="px-4 py-2" id="current-contact"></div>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        onclick="editField('contact')">Edit</button>
                                 </div>
                                 <div class="grid grid-cols-2">
                                     <div class="px-4 py-2 font-semibold">Current Address</div>
-                                    <div class="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
+                                    <div class="px-4 py-2" id="current-address"></div>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        onclick="editField('address')">Edit</button>
                                 </div>
                                 <div class="grid grid-cols-2">
                                     <div class="px-4 py-2 font-semibold">Permanant Address</div>
-                                    <div class="px-4 py-2">Arlington Heights, IL, Illinois</div>
+                                    <div class="px-4 py-2" id="current-permAddress"></div>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        onclick="editField('permAddress')">Edit</button>
                                 </div>
                                 <div class="grid grid-cols-2">
-                                    <div class="px-4 py-2 font-semibold">Email.</div>
+                                    <div class="px-4 py-2 font-semibold">Email</div>
                                     <div class="px-4 py-2">
-                                        <a class="text-blue-800" href="mailto:jane@example.com">jane@example.com</a>
+                                        <a class="text-blue-800" id="current-email" href="mailto:jane@example.com"></a>
                                     </div>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        onclick="editField('email')">Edit</button>
                                 </div>
                                 <div class="grid grid-cols-2">
                                     <div class="px-4 py-2 font-semibold">Birthday</div>
-                                    <div class="px-4 py-2">Feb 16, 1998</div>
+                                    <div class="px-4 py-2" id="current-birthday"></div>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        onclick="editField('birthday')">Edit</button>
                                 </div>
                                 <div class="grid grid-cols-2">
                                     <div class="px-4 py-2 font-semibold">Wage</div>
                                     <div class="px-4 py-2" id="user-wage"><span id="current-wage">Wage</span></div>
-                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="editField('wage')">Edit</button>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        onclick="editField('wage')">Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -175,80 +178,5 @@
         </div>
     </div>
 </body>
+
 </html>
-
-<script>
-    // Hard-coded user ID for now
-    const userId = '2';
-
-    // Function to handle editing fields
-    function editField(field) {
-        // Get the current value
-        const currentValue = document.getElementById(`current-${field}`).innerText;
-        const name = document.getElementById('user-name').innerText;
-        const role = document.getElementById('current-role').innerText;
-        const wage = document.getElementById('current-wage').innerText; 
-
-
-        // Prompt the user for the new value
-        const newValue = prompt(`Enter new ${field}:`, currentValue);
-
-        // Check if the user provided a new value
-        if (newValue !== null) {
-            // Update the UI with the new value
-            document.getElementById(`current-${field}`).innerText = newValue;
-            console.log(newValue)
-
-            // Make the PUT request to update the user profile
-            const requestBody = {
-                uid: userId,
-                name: name, // Replace with the actual name
-                wage: field === 'wage' ? parseFloat(newValue) : wage,
-                role: field === 'role' ? newValue : role
-            };
-
-            fetch('https://fqov6b86hi.execute-api.us-east-2.amazonaws.com/v1/profile', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle the response if needed
-                    console.log('Profile updated:', data);
-                })
-                .catch(error => console.error('Error updating profile:', error));
-        }
-    }
-
-    // Fetch user profile data
-    fetch(`https://fqov6b86hi.execute-api.us-east-2.amazonaws.com/v1/profile?uid=${userId}`)
-        .then(response => response.json())
-        .then(data => {
-            // Assuming data.item is the structure of your response
-            let userName2 = document.getElementById('user-name2');
-            let userName = document.getElementById('user-name');
-            let userFirstName = document.getElementById('user-firstname');
-            let userLastName = document.getElementById('user-lastname');
-            let userRole = document.getElementById('current-role');
-            let userWage = document.getElementById('current-wage');
-
-            // Splitting the full name into first and last names
-            let fullName = data.item.name.split(' ');
-            let firstName = fullName[0];
-            let lastName = fullName.slice(1).join(' ');
-
-            // Update UI with the received user profile data
-            userName2.innerText = data.item.name;
-            userName.innerText = data.item.name;
-            userFirstName.innerText = firstName;
-            userLastName.innerText = lastName;
-            userRole.innerText = data.item.role;
-            userWage.innerText = data.item.wage;
-
-            // Add more elements as needed
-        })
-        .catch(error => console.error('Error:', error));
-</script>
