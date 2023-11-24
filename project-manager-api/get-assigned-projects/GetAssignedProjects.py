@@ -14,7 +14,7 @@ def lambda_handler(event, context):
         items = getAssignedProjects(uid)
         return {
             "statusCode": 200,
-            "projects": items
+            "entries": items
         }
     except Exception as err:
         print(f"Error occured in GetAssignedProjects LambdaHandler: {err}")

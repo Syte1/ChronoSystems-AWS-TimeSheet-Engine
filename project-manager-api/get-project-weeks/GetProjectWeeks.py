@@ -18,7 +18,7 @@ def lambda_handler(event, context):
         items = getProjectWeeks(projectId, uid)
         return {
             "statusCode": 200,
-            "projects": items
+            "entries": items
         }
     except KeyError as err:
         print(f"Error occured in GetProjectWeeks.py LambdaHandler: {err}")
