@@ -50,7 +50,7 @@ This route is used in the timesheet submission page where users are able to sele
 ## Del Requests
 ### Leave a project
 ```
-/delJoinProject
+/deleteJoinProject
 ```
 This route is used to remove a user/employee from a project. This does **not** do a cascading delete operation.
 #### Request body for leaving a project
