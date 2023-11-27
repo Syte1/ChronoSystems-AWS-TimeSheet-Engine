@@ -74,7 +74,7 @@ https://9zsjgjfqlh.execute-api.us-west-2.amazonaws.com/development
 /getAllProjects
 ```
 Retrieves all projects. This can be used to create a table of all existing projects.
-### Get a name of a specific project
+### Get all project members
 ```
 /getProjectMembers?projectId=<id of project>
 ```
