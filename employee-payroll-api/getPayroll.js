@@ -61,7 +61,7 @@ exports.handler = (event, context, callback) => {
         if (items.length > 1) {
           items.sort((a, b) => a.end_date > b.end_date)
         }
-        return callback(null, JSON.parse({"message": "get payroll succeeded", "Items": items, "statusCode": 200}));
+        return callback(null, JSON.parse({"message": "get payroll succeeded", "Item": item[0], "statusCode": 200}));
       }
     });
   }

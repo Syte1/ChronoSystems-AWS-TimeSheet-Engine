@@ -195,16 +195,17 @@
   <div class="method-summary"></div>
   <h4><a href="#Default">Default</a></h4>
   <ul>
-  <li><a href="#payrollGet"><code><span class="http-method">get</span> /payroll</code></a></li>
-  <li><a href="#payrollPost"><code><span class="http-method">post</span> /payroll</code></a></li>
+  <li><a href="#rootGet"><code><span class="http-method">get</span> /</code></a></li>
+  <li><a href="#rootPost"><code><span class="http-method">post</span> /</code></a></li>
+  <li><a href="#uidGet"><code><span class="http-method">get</span> /{uid}</code></a></li>
   </ul>
 
   <h1><a name="Default">Default</a></h1>
-  <div class="method"><a name="payrollGet"></a>
+  <div class="method"><a name="rootGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
-    <pre class="get"><code class="huge"><span class="http-method">get</span> /payroll</code></pre></div>
-    <div class="method-summary">Get Payroll Data - if no start_period and end_period are provided, return the latest payroll data (<span class="nickname">payrollGet</span>)</div>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /</code></pre></div>
+    <div class="method-summary">Get Payroll Data - if no start_period and end_period are provided, return the latest payroll data (<span class="nickname">rootGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -261,11 +262,11 @@
     <pre class="example"><code>{&quot;message&quot;:&quot;Unable to read item. Error JSON:${err}&quot;,&quot;statusCode&quot;:500}</code></pre>
   </div> <!-- method -->
   <hr/>
-  <div class="method"><a name="payrollPost"></a>
+  <div class="method"><a name="rootPost"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
-    <pre class="post"><code class="huge"><span class="http-method">post</span> /payroll</code></pre></div>
-    <div class="method-summary">Post Payroll Data (<span class="nickname">payrollPost</span>)</div>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /</code></pre></div>
+    <div class="method-summary">Post Payroll Data (<span class="nickname">rootPost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -302,7 +303,7 @@
         <a href="#"></a>
     <h3 class="field-label">Example data</h3>
     <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>{&quot;uid&quot;:123,&quot;start_period&quot;:&quot;11/15/2023&quot;,&quot;end_period&quot;:&quot;11/30/2023&quot;,&quot;start_period_end_period&quot;:&quot;11/15/2023_11/30/2023&quot;,&quot;pay&quot;:1000}</code></pre>
+    <pre class="example"><code>{&quot;message&quot;:&quot;putItem succeeded&quot;,&quot;statusCode&quot;:200,&quot;Item&quot;:{&quot;uid&quot;:123,&quot;start_period&quot;:&quot;11/15/2023&quot;,&quot;end_period&quot;:&quot;11/30/2023&quot;,&quot;start_period_end_period&quot;:&quot;11/15/2023_11/30/2023&quot;,&quot;pay&quot;:1000}}</code></pre>
     <h4 class="field-label">400</h4>
     Bad request
         <a href="#"></a>
@@ -315,6 +316,62 @@
     <h3 class="field-label">Example data</h3>
     <div class="example-data-content-type">Content-Type: application/json</div>
     <pre class="example"><code>{&quot;message&quot;:&quot;DynamoDB operation failed&quot;,&quot;statusCode&quot;:500}</code></pre>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="uidGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /{uid}</code></pre></div>
+    <div class="method-summary">Get All payroll Data by uid (<span class="nickname">uidGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">uid (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; User ID </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Successful response
+        <a href="#"></a>
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{&quot;message&quot;:&quot;getPayroll by uid succeeded&quot;,&quot;statusCode&quot;:200,&quot;Items&quot;:[{&quot;uid&quot;:1,&quot;start_period&quot;:&quot;11/01/2023&quot;,&quot;end_period&quot;:&quot;11/15/2023&quot;,&quot;pay&quot;:1000,&quot;start_period_end_period&quot;:&quot;11/01/2023_11/15/2023&quot;},{&quot;uid&quot;:1,&quot;start_period&quot;:&quot;11/16/2023&quot;,&quot;end_period&quot;:&quot;11/30/2023&quot;,&quot;pay&quot;:850,&quot;start_period_end_period&quot;:&quot;11/16/2023_11/30/2023&quot;}]}</code></pre>
+    <h4 class="field-label">400</h4>
+    Bad request
+        <a href="#"></a>
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{&quot;message&quot;:&quot;uid is required&quot;,&quot;statusCode&quot;:400}</code></pre>
+    <h4 class="field-label">404</h4>
+    No record found
+        <a href="#"></a>
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{&quot;message&quot;:&quot;No record were found with the parameter provided, please try again&quot;,&quot;statusCode&quot;:404}</code></pre>
+    <h4 class="field-label">500</h4>
+    Internal server error
+        <a href="#"></a>
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{&quot;message&quot;:&quot;Unable to read item. Error JSON:${err}&quot;,&quot;statusCode&quot;:500}</code></pre>
   </div> <!-- method -->
   <hr/>
 
