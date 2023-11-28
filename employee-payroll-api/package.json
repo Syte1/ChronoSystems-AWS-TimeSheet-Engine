@@ -1,0 +1,15 @@
+{
+  "name": "employee-payroll-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "getAllPayroll.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1506.0",
+    "axios": "^1.6.2"
+  }
+}
