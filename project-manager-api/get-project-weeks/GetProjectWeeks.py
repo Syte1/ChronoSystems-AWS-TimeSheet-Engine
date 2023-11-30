@@ -1,6 +1,6 @@
 import os
 import boto3
-from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.conditions import Key, Attr
 
 TABLE_NAME = os.environ.get('TABLE_NAME', 'comp4968-project-weeks')
 PARTITION_KEY = "projectId"
@@ -37,6 +37,7 @@ def lambda_handler(event, context):
     
 def getProjectWeeks(projectId, uid):
     response = table.query(
-        KeyConditionExpression=Key('projectId').eq(projectId) & Key('uid').eq(uid)
+        KeyConditionExpression=Key('uid').eq(uid),
+        FilterExpression=Attr('projectId').eq(projectId)
     )
     return response["Items"]
