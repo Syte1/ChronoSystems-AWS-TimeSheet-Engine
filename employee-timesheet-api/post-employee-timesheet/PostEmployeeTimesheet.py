@@ -1,4 +1,5 @@
 import os
+import json
 import boto3
 from datetime import datetime, timedelta
 from NegativeNumberError import NegativeNumberError
@@ -7,7 +8,7 @@ TABLE_NAME = os.environ.get('TABLE_NAME', 'comp4968-timesheet')
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(TABLE_NAME)
 
-def lambda_handler(event, context):
+def lambda_handler(event, context):    
     try:
         submissions = event["submission"]
         valid_submission = validateTimesheet(submissions)
@@ -50,7 +51,7 @@ def calculateNetHours(submissions: list) -> list:
         try:
             start_time = datetime.strptime(submission["start_time"], date_format)
             end_time = datetime.strptime(submission["end_time"], date_format)
-            break_time = timedelta(minutes=submission["break_duration"])
+            break_time = timedelta(minutes=int(submission["break_duration"]))
             net_shift_time = checkPositiveNetTime((end_time - start_time - break_time).total_seconds() / 3600)
             submission["net_time"] = "{0:.2f}".format(net_shift_time)
         except ValueError as err:
@@ -62,10 +63,6 @@ def calculateNetHours(submissions: list) -> list:
             invalid_entries.append(submission)
             continue
         except NegativeNumberError as err:
-            submission["error"] = str(err)
-            invalid_entries.append(submission)
-            continue
-        except Exception as err:
             submission["error"] = str(err)
             invalid_entries.append(submission)
     return invalid_entries

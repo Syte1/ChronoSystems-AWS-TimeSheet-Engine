@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Tailwind CSS from CDN for simplicity -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <title>Timesheet Submission</title>
+    <style>
+        .container {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <h2 class="text-4xl font-bold mb-4">Employee Timesheet Submission Form</h2>
+    <div id="container" class="text-center overflow-x-auto">
+        <form id="form_timesheet" class="flex flex-col gap-2"></form>
+        <div id="div_result"></div>
+    </div>
+    <script src="../js/timesheetSubmission.js"></script>
+</body>
+
+</html>

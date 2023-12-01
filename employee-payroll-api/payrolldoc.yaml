@@ -1,0 +1,160 @@
+openapi: 3.0.0
+info:
+  title: API for Employee Payroll
+  version: "1.0"
+paths:
+  /:
+    get:
+      summary: Get Payroll Data - if no start_period and end_period are provided, return the latest payroll data
+      parameters:
+        - name: uid
+          in: query
+          description: User ID
+          required: true
+          schema:
+            type: string
+        - name: start_period
+          in: query
+          description: Start period
+          required: false
+          schema:
+            type: string
+        - name: end_period
+          in: query
+          description: End period
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                
+                uid: 1
+                start_period: 11/15/2023
+                end_period: 11/30/2023
+                pay: 1000
+                start_period_end_period: 11/15/2023_11/30/2023
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              example:
+                message: uid and start_period_end_period are required
+                statusCode: 400
+        "404":
+          description: No record found
+          content:
+            application/text:
+              example: No record were found with the parameter provided, please try again
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: Unable to read item. Error JSON:${err}
+                statusCode: 500
+    post:
+      summary: Post Payroll Data
+      requestBody:
+        description: Payroll data to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostPayroll"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: putItem succeeded
+                statusCode: 200
+                Item:
+                  uid: 123
+                  start_period: 11/15/2023
+                  end_period: 11/30/2023
+                  start_period_end_period: 11/15/2023_11/30/2023
+                  pay: 1000
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              example:
+                message: Invalid input data. Please provide valid data.
+                statusCode: 400
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: DynamoDB operation failed
+                statusCode: 500
+  /{uid}:
+    get:
+      summary: Get All payroll Data by uid
+      parameters:
+        - name: uid
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: getPayroll by uid succeeded
+                statusCode: 200
+                Items:
+                  - uid: 1
+                    start_period: 11/01/2023
+                    end_period: 11/15/2023
+                    pay: 1000
+                    start_period_end_period: 11/01/2023_11/15/2023
+                  - uid: 1
+                    start_period: 11/16/2023
+                    end_period: 11/30/2023
+                    pay: 850
+                    start_period_end_period: 11/16/2023_11/30/2023
+
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              example:
+                message: uid is required
+                statusCode: 400
+        "404":
+          description: No record found
+          content:
+            application/json:
+              example:
+                message: No record were found with the parameter provided, please try again
+                statusCode: 404
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: Unable to read item. Error JSON:${err}
+                statusCode: 500
+
+components:
+  schemas:
+    PostPayroll:
+      type: object
+      properties:
+        uid:
+          type: string
+        start_period:
+          type: string
+        end_period:
+          type: string
+        pay:
+          type: number

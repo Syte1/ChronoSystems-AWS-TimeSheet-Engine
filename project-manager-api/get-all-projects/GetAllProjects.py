@@ -10,7 +10,7 @@ def lambda_handler(event, context):
         items = table.scan()["Items"]
         return {
             "statusCode": 200,
-            "projects": items
+            "entries": items
         }
     except Exception as err:
         print(f"Error occured in PutProject LambdaHandler: {err}")
