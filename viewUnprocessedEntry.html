@@ -83,14 +83,17 @@
     </head>
     <body>
         <div class="container">
-            <h2>My Timesheets</h2>
+            <h2>Employee Unprocessed Timesheets</h2>
             <!-- Form for input -->
             <form id="searchForm">
-                <label for="startDate">Start Date:</label>
+                <label for="employeeId">Employee ID:</label>
+                <input type="text" id="employeeId" placeholder="Enter Employee ID">
+    
+                <!-- <label for="startDate">Start Date:</label>
                 <input type="date" id="startDate">
     
                 <label for="endDate">End Date:</label>
-                <input type="date" id="endDate">
+                <input type="date" id="endDate"> -->
     
                 <button type="submit">Search</button>
             </form>
@@ -111,62 +114,5 @@
             </table>
         </div>
 
-    <script>
-        document.getElementById('searchForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const employeeId = 1 //document.getElementById('employeeId').value;
-
-        // Convert dates to the expected format
-        const startDate = convertDateFormat(document.getElementById('startDate').value);
-        const endDate = convertDateFormat(document.getElementById('endDate').value);
-
-        let apiUrl = `https://oxtwzrrqrg.execute-api.us-west-2.amazonaws.com/development/getEmployeeTimesheet?uid=${employeeId}`;
-        if (startDate) apiUrl += `&start_date=${startDate}`;
-        if (endDate) apiUrl += `&end_date=${endDate}`;
-
-        console.log(apiUrl)
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                try {
-                    // Assuming data.entries is a JSON string that needs to be parsed
-                    // var entries = JSON.parse(data.entries);
-                    updateTable(data.entries);
-                } catch (e) {
-                    console.error('Error parsing entries:', e);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    });
-
-    // Function to convert date format
-    function convertDateFormat(dateString) {
-        if (dateString) {
-            const [year, month, day] = dateString.split('-');
-            return `${month}/${day}/${year}`;
-        } else {
-            return '';
-        }
-    }
-    
-    function updateTable(entries) {
-        const table = document.getElementById('dataTable');
-        table.innerHTML = table.rows[0].innerHTML; // Clear existing rows except the header
-
-        for (var i = 0; i < entries.length; i++) {
-            var row = `<tr>
-                           <td>${entries[i].break_duration}</td>
-                           <td>${entries[i].date}</td>
-                           <td>${entries[i].start_time}</td>
-                           <td>${entries[i].end_time}</td>
-                           <td>${entries[i].net_time}</td>
-                       </tr>`;
-            table.innerHTML += row;
-        }
-    }
-    </script>
-    
 </body>
 </html>
