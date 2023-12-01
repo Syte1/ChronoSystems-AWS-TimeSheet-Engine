@@ -125,7 +125,7 @@
             const startDate = convertDateFormat(document.getElementById('startDate').value);
             const endDate = convertDateFormat(document.getElementById('endDate').value);
 
-            let apiUrl = `https://s2z6h094ph.execute-api.us-west-2.amazonaws.com/test?uid=${employeeId}`;
+            let apiUrl = `https://s2z6h094ph.execute-api.us-west-2.amazonaws.com/test/${employeeId}`;
             if (startDate) apiUrl += `&start_period=${startDate}`;
             if (endDate) apiUrl += `&end_period=${endDate}`;
 
@@ -134,7 +134,7 @@
                 .then(data => {
                     console.log(data)
                     try {
-                        if (data) {
+                        if (data && data.Items && data.Items.length > 0) {
                             updateTable([data]); // Pass an array with the single object
                         } else {
                             console.error('No data found in response');
@@ -144,6 +144,7 @@
                     }
                 })
                 .catch(error => console.error('Error:', error));
+
         });
 
         // Function to convert date format
@@ -157,22 +158,23 @@
         }
 
         function updateTable(entries) {
-            console.log(entries); // Log the entries for debugging
             const table = document.getElementById('dataTable');
             table.innerHTML = table.rows[0].innerHTML; // Clear existing rows except the header
 
+            // Assuming 'entries' is an array of objects as per your console.log
             entries.forEach(entry => {
-                if (entry) {
+                entry.Items.forEach(item => {
                     var row = `<tr>
-                           <td>${entry.uid || 'N/A'}</td>
-                           <td>${entry.start_period || 'N/A'}</td>
-                           <td>${entry.end_period || 'N/A'}</td>
-                           <td>${entry.pay || 'N/A'}</td>
-                       </tr>`;
+                <td>${item.uid || 'N/A'}</td>
+                <td>${item.start_period || 'N/A'}</td>
+                <td>${item.end_period || 'N/A'}</td>
+                <td>${item.pay || 'N/A'}</td>
+            </tr>`;
                     table.innerHTML += row;
-                }
+                });
             });
         }
+
     </script>
 
 </body>
