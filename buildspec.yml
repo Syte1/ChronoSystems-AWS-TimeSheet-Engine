@@ -22,3 +22,5 @@ artifacts:
     - js/*
     - images/*
     - html/*
+    - appspect.yml
+    - scripts/**/*
