@@ -1,0 +1,11 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/ChronoSystems-AWS-TimeSheet-Engine
+file_exists_behavior: OVERWRITE
+hooks:
+  ApplicationStart:
+    - location: scripts/restart_server.sh
+      timeout: 300
+      runas: ubuntu
