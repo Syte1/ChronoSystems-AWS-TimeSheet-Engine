@@ -1,7 +1,7 @@
 // ENDPOINTS
-const ENDPOINT_CENTRALAPI_URL = "https://y7aq7em2t6.execute-api.us-west-2.amazonaws.com/test/employeetimesheet";
+const ENDPOINT_CENTRALAPI_URL = "https://y7aq7em2t6.execute-api.us-west-2.amazonaws.com/test";
 const ENDPOINT_CENTRALAPI_POSTWEEKS = "/employeetimesheet"
-function ENDPOINT_CENTRALAPI_GETUNPROCESSEDTIMESHEET(uid) { return `/getunprocessedentries?uid=${uid}` };
+function ENDPOINT_CENTRALAPI_GETUNPROCESSEDTIMESHEET(uid) { return `/employeetimesheet/getunprocessedentries?uid=${uid}` };
 
 const HTTPMETHOD_GET = "GET";
 const HTTPMETHOD_POST = "POST";
@@ -160,13 +160,13 @@ function formatTime(timeString) {
 function isValidTime(timeString) {
     const timeRegex = /^(0?[1-9]|1[0-2]):([0-5][0-9]) (AM|PM)$/i;
     return timeRegex.test(timeString);
-  }
+}
 
 function isValidBreakTime(breakTime) {
-  const breakTimeInt = parseInt(breakTime, 10);
+    const breakTimeInt = parseInt(breakTime, 10);
 
-  // Check if the input is a positive integer
-  return !isNaN(breakTimeInt) && breakTimeInt >= 0;
+    // Check if the input is a positive integer
+    return !isNaN(breakTimeInt) && breakTimeInt >= 0;
 }
 
 function isValidDate(date) {
@@ -206,10 +206,10 @@ async function handleTimesheetSubmission(uid) {
         }
     });
     clearResultDiv();
-    const prettyJson = document.createElement("pre");
-    DIV_RESULT.appendChild(prettyJson);
-    prettyJson.textContent = JSON.stringify(requestBody, undefined, 2);
-
+    // const prettyJson = document.createElement("pre");
+    // DIV_RESULT.appendChild(prettyJson);
+    // prettyJson.textContent = JSON.stringify(requestBody, undefined, 2);
+    displaySubmissionInfo(requestBody);
     return await apiRequest(ENDPOINT_CENTRALAPI_URL + ENDPOINT_CENTRALAPI_POSTWEEKS, HTTPMETHOD_POST, requestBody);
 }
 
@@ -222,7 +222,56 @@ function createButtonTimesheetForm() {
     return timesheetButton;
 }
 
-document.addEventListener("DOMContentLoaded", async() => {
+function displaySubmissionInfo(data) {
+    const submissions = data.submission;
+    const skippedSubmissions = data.skipped_submission;
+
+    let submissionHTML = "<h4 class='text-lg font-bold mb-4'>Submission Information:</h4>";
+    submissionHTML += "<ul>";
+    submissions.forEach(submission => {
+        submissionHTML += `
+        <li>
+          <strong>Date:</strong> ${submission.date}<br>
+          <strong>Start Time:</strong> ${submission.start_time}<br>
+          <strong>End Time:</strong> ${submission.end_time}<br>
+          <strong>Break Duration:</strong> ${submission.break_duration} minutes
+        </li>
+      `;
+    });
+    submissionHTML += "</ul>";
+
+    let skippedSubmissionHTML = "<h4 class='text-lg font-bold mb-4'>Skipped Submission Information: </h4>";
+    skippedSubmissionHTML += "<ul>";
+    skippedSubmissions.forEach(skippedSubmission => {
+        skippedSubmissionHTML += `
+        <li>
+          <strong>Date:</strong> ${skippedSubmission.date}<br>
+          <strong>Start Time:</strong> ${skippedSubmission.start_time}<br>
+          <strong>End Time:</strong> ${skippedSubmission.end_time}<br>
+          <strong>Break Duration:</strong> ${skippedSubmission.break_duration} minutes
+        </li>
+      `;
+    });
+    skippedSubmissionHTML += "</ul>";
+
+    DIV_RESULT.innerHTML = submissionHTML + skippedSubmissionHTML;
+}
+
+function displayStatus(jsonObject, container, title) {
+    let propertiesHTML = `<h4 class='text-lg font-bold mb-4'>${title}</h4><ul>`;
+  
+    for (const property in jsonObject) {
+      if (jsonObject.hasOwnProperty(property)) {
+        propertiesHTML += `<li><strong>${property}:</strong> ${jsonObject[property]}</li>`;
+      }
+    }
+  
+    propertiesHTML += "</ul>";
+  
+    container.innerHTML = propertiesHTML + DIV_RESULT.innerHTML;
+  }
+
+document.addEventListener("DOMContentLoaded", async () => {
     try {
         // const auth = cognito authentication manager;
         // const uid = auth.uid; // call 
@@ -240,7 +289,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                 clearResultDiv();
                 DIV_RESULT.textContent = "Error submitting timesheet.";
             } else {
-                DIV_RESULT.innerHTML = timesheetReponse + DIV_RESULT.innerHTML;
+                displayStatus(timesheetReponse, DIV_RESULT, "Response:");
             }
         });
     } catch (error) {
