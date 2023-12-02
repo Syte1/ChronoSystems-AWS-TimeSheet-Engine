@@ -51,7 +51,7 @@ def calculateNetHours(submissions: list) -> list:
         try:
             start_time = datetime.strptime(submission["start_time"], date_format)
             end_time = datetime.strptime(submission["end_time"], date_format)
-            break_time = timedelta(minutes=submission["break_duration"])
+            break_time = timedelta(minutes=int(submission["break_duration"]))
             net_shift_time = checkPositiveNetTime((end_time - start_time - break_time).total_seconds() / 3600)
             submission["net_time"] = "{0:.2f}".format(net_shift_time)
         except ValueError as err:

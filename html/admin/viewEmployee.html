@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>View Paystub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-full mx-auto">
+  <div class="container mx-auto px-4">
+    <div class="space-y-12">
+      <div class="space-y-10 divide-y divide-gray-900/10">
+        <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
+          <div class="container mx-auto mt-8 p-4"> <!-- Added p-4 for padding -->
+            <h2 class="text-base font-semibold leading-7 text-gray-900">All Users</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">A list of all the users in your company account including
+              their name, salary, email and role.</p>
+          </div>
+
+          <form id="viewPaystub" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+            <div class="container mx-auto mt-8 p-4"> <!-- Added p-4 for padding -->
+              <!-- table logic goes here -->
+              <div class="px-4 sm:px-6 lg:px-8">
+                <div class="mt-8 flow-root">
+                  <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle">
+                      <table id="employeeInfo" class="min-w-full border-separate border-spacing-0">
+                        <thead>
+                          <tr>
+                            <th scope="col"
+                              class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">
+                              Name</th>
+                            <th scope="col"
+                              class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">
+                              Email</th>
+                            <th scope="col"
+                              class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">
+                              Role</th>
+                            <th scope="col"
+                              class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
+                              Salary</th>
+                            <th scope="col"
+                              class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8">
+                              <span class="sr-only">PayStub</span>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody id="employee-table-body">
+                          <!-- More people... -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end table logic -->
+            </div>
+          </form>
+        </div>
+
+
+      </div>
+
+
+      <!-- paystub info of specific employee -->
+      <div id="employeepaystub" class="hidden">
+        <h2 class="text-base font-semibold leading-7 text-gray-900">Detailed Pay Stub</h2>
+        <div class="px-4 sm:px-6 lg:px-8">
+          <div class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+              <div class="inline-block min-w-full py-2 align-middle">
+                <table class="min-w-full border-separate border-spacing-0">
+                  <thead>
+                    <tr>
+                      <th scope="col"
+                        class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">
+                        Name</th>
+                      <th scope="col"
+                        class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">
+                        Start Period</th>
+                      <th scope="col"
+                        class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">
+                        End Period</th>
+                      <th scope="col"
+                        class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
+                        Pay</th>
+                    </tr>
+                  </thead>
+                  <tbody id="paystub-table-body">
+                    <!-- More people... -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of paystub info -->
+
+    </div>
+  </div>
+  <script src="../../js/admin/viewEmployee.js"></script>
+</body>
+
+</html>

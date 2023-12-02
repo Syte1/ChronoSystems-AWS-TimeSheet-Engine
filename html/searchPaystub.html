@@ -88,16 +88,16 @@
 
 <body>
     <div class="container">
-        <h2>Employee Timesheet Search</h2>
+        <h2>Employee Paystub Search</h2>
         <!-- Form for input -->
         <form id="searchForm">
             <label for="employeeId">Employee ID:</label>
             <input type="text" id="employeeId" placeholder="Enter Employee ID">
 
-            <label for="startDate">Start Date:</label>
+            <label for="startDate">Start Period:</label>
             <input type="date" id="startDate">
 
-            <label for="endDate">End Date:</label>
+            <label for="endDate">End Period:</label>
             <input type="date" id="endDate">
 
             <button type="submit">Search</button>
@@ -109,11 +109,10 @@
         <!-- Timesheet table -->
         <table id="dataTable">
             <tr>
-                <th>Break Duration</th>
-                <th>Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Net Time</th>
+                <th>Employee ID</th>
+                <th>Start Period</th>
+                <th>End Period</th>
+                <th>Pay</th>
             </tr>
             <!-- Table rows will be populated here -->
         </table>
@@ -123,32 +122,25 @@
         document.getElementById('searchForm').addEventListener('submit', function (event) {
             event.preventDefault();
             const employeeId = document.getElementById('employeeId').value;
-
-            // Convert dates to the expected format
             const startDate = convertDateFormat(document.getElementById('startDate').value);
             const endDate = convertDateFormat(document.getElementById('endDate').value);
 
-            let apiUrl = `https://oxtwzrrqrg.execute-api.us-west-2.amazonaws.com/development/getEmployeeTimesheet?uid=${employeeId}`;
-            if (startDate) apiUrl += `&start_date=${startDate}`;
-            if (endDate) apiUrl += `&end_date=${endDate}`;
-
-            console.log(apiUrl)
+            let apiUrl = `https://s2z6h094ph.execute-api.us-west-2.amazonaws.com/test/${employeeId}`;
+            if (startDate) apiUrl += `&start_period=${startDate}`;
+            if (endDate) apiUrl += `&end_period=${endDate}`;
 
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data); // Debugging line to inspect the response
-                    if (data.entries && typeof data.entries === 'string') {
-                        try {
-                            var entries = JSON.parse(data.entries);
-                            updateTable(entries);
-                        } catch (e) {
-                            console.error('Error parsing entries:', e);
+                    console.log(data)
+                    try {
+                        if (data && data.Items && data.Items.length > 0) {
+                            updateTable([data]); // Pass an array with the single object
+                        } else {
+                            console.error('No data found in response');
                         }
-                    } else if (data.entries && typeof data.entries === 'object') {
-                        updateTable(data.entries);
-                    } else {
-                        console.error('Invalid format for entries:', data.entries);
+                    } catch (e) {
+                        console.error('Error processing data:', e);
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -169,17 +161,20 @@
             const table = document.getElementById('dataTable');
             table.innerHTML = table.rows[0].innerHTML; // Clear existing rows except the header
 
-            for (var i = 0; i < entries.length; i++) {
-                var row = `<tr>
-                           <td>${entries[i].break_duration}</td>
-                           <td>${entries[i].date}</td>
-                           <td>${entries[i].start_time}</td>
-                           <td>${entries[i].end_time}</td>
-                           <td>${entries[i].net_time}</td>
-                       </tr>`;
-                table.innerHTML += row;
-            }
+            // Assuming 'entries' is an array of objects as per your console.log
+            entries.forEach(entry => {
+                entry.Items.forEach(item => {
+                    var row = `<tr>
+                <td>${item.uid || 'N/A'}</td>
+                <td>${item.start_period || 'N/A'}</td>
+                <td>${item.end_period || 'N/A'}</td>
+                <td>${item.pay || 'N/A'}</td>
+            </tr>`;
+                    table.innerHTML += row;
+                });
+            });
         }
+
     </script>
 
 </body>

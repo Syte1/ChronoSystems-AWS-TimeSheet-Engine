@@ -129,10 +129,11 @@
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 try {
                     // Assuming data.entries is a JSON string that needs to be parsed
-                    var entries = JSON.parse(data.entries);
-                    updateTable(entries);
+                    // var entries = JSON.parse(data.entries);
+                    updateTable(data.entries);
                 } catch (e) {
                     console.error('Error parsing entries:', e);
                 }
