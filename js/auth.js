@@ -58,7 +58,7 @@ async function signIn(username, password) {
       }
     })
     .then((data) => {
-      setSecureCookie('token', data.token);
+      setSecureCookie('token', data.AuthenticationResult.AccessToken);
     })
     .catch((error) => {
       console.error(error);
