@@ -1,4 +1,4 @@
-const baseUrl = 'https://gou67la8zc.execute-api.us-west-2.amazonaws.com/test';
+const baseUrl = 'https://y7aq7em2t6.execute-api.us-west-2.amazonaws.com/test';
 
 // Function to call the API endpoint for token verification
 async function verifyToken() {
@@ -40,8 +40,8 @@ function getSecureCookie(cookieName = 'token') {
 }
 
 async function signIn(username, password) {
-  const url = `${baseUrl}/signIn`;
-  const data = {username: username, password: password};
+  const url = `${baseUrl}/signin`;
+  const data = {body: {username: username, password: password}};
 
   return fetch(url, {
     method: 'POST',
@@ -58,7 +58,7 @@ async function signIn(username, password) {
       }
     })
     .then((data) => {
-      setSecureCookie('token', data.AuthenticationResult.AccessToken);
+      setSecureCookie('token', data.AuthenticationResult.AccessToken, data.AuthenticationResult.ExpiresIn);
     })
     .catch((error) => {
       console.error(error);
@@ -80,7 +80,7 @@ async function signIn(username, password) {
 }
 */
 async function signUp(userDetails) {
-  const url = `${baseUrl}/signUp`;
+  const url = `${baseUrl}/signup`;
 
   return fetch(url, {
     method: 'POST',
@@ -101,8 +101,8 @@ async function signUp(userDetails) {
     });
 }
 
-function setSecureCookie(name, value) {
-  document.cookie = `${name}=${value}; Secure`;
+function setSecureCookie(name, value, expires = 3600) {
+  document.cookie = `${name}=${value}; ${expires} ;Secure`;
 }
 
 /*
