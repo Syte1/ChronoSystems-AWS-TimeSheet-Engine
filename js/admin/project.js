@@ -33,6 +33,29 @@ async function fetchProjectMembers(projectId){
   }
 }
 
+async function fetchAllEmployees(){
+  try{
+    const result = await fetch(`${employeeApi}/profile/all`);
+    const res = await result.json();
+    const {items, statusCode} = res
+
+    if (statusCode !== 200) {
+      throw new Error(`Error: ${res.statusCode} ${res.message}`);
+    }
+    return items
+  } catch(err){
+    console.error(err)
+  }
+}
+
+function createEmployeeSelect(employee){
+  const {uid, full_name} = employee
+  const option = document.createElement('option');
+  option.value = uid
+  option.textContent = full_name
+  return option;
+}
+
 async function createProject(name){
   try{
     result = await fetch(`${projectsApi}/putProject`, {
@@ -106,7 +129,7 @@ function displayProjectOptions(projects){
 
 function displayMembers(members){
 
-  const select = document.getElementById('employees-select')
+  const select = document.getElementById('project-employees-select')
   const unassignButton = document.getElementById('unassignEmployees')
 
   select.innerHTML = ''
@@ -133,9 +156,7 @@ function displayMembers(members){
 }
 
 function createEmployeeSelect(member){
-  console.log(`creating member select for: ${JSON.stringify(member)}`)
   const {uid, full_name} = member
-  console.log(full_name)
   const option = document.createElement('option');
   option.value = uid
   option.textContent = full_name
@@ -178,28 +199,77 @@ projectSelect.addEventListener('change', async (e) => {
 //add onclick event to the unassign button
 const unassignButton = document.getElementById('unassignEmployees')
 unassignButton.addEventListener('click', async (e) => {
+  console.log('unassigning employees')
   const projectId = document.getElementById('project-select').value
-  const employeesSelect = document.getElementById('employees-select')
+  const employeesSelect = document.getElementById('project-employees-select')
   const uids = Array.from(employeesSelect.selectedOptions).map(option => option.value)
-  console.log(`unassigning ${uids} from ${projectId}`)
   unassignEmployees(projectId, uids)
 })
 
 function unassignEmployees(projectId, uids){
+  console.log(`unassigning ${uids} from ${projectId}`)
   uids.forEach(async uid => {
     console.log(`removing ${uid} from ${projectId}`)
     const res = await removeProjectMember(projectId, uid)
     //display success message
     const feedback = document.getElementById('unassignMessage')
-    feedback.textContent += res.message
+    const newfb = document.createElement('p')
+    newfb.textContent = res.message
+    newfb.classList.add('text-green-500')
+    newfb.classList.add('text-sm')
+    newfb.classList.add('font-medium')
+    feedback.appendChild(newfb)
   })
 }
 
+function displayAllEmployee(employees){
+  const employeeSelect = document.getElementById('employees-select')
+    const employees_with_name = employees.map(employee => {
+      const full_name = `${employee.name} ${employee.lname}`
+      return {...employee, full_name}
+    })
+    const employeeOptions = employees_with_name.map(employee => {
+      const option = createEmployeeSelect(employee)
+      return option
+    })
+    employeeOptions.forEach(option => {
+      employeeSelect.appendChild(option)
+    })
+}
+
+//add onclick event to the create project form
+const createProjectForm = document.getElementById('createProjectForm')
+createProjectForm.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const feedback = document.getElementById('createMessage')
+  const name = document.getElementById('projectName').value
+  const res = await createProject(name)
+  feedback.textContent = res.message
+  //assign the selected employees to the project
+  const projectId = res.entry.projectId
+  const employeesSelect = document.getElementById('employees-select')
+  const uids = Array.from(employeesSelect.selectedOptions).map(option => option.value)
+  uids.forEach(async uid => {
+    console.log(`adding ${uid} to ${projectId}`)
+    const res = await addProjectMember(projectId, uid)
+    //display success message
+    const newfb = document.createElement('p')
+    newfb.textContent = res.message
+    newfb.classList.add('text-green-500')
+    newfb.classList.add('text-sm')
+    newfb.classList.add('font-medium')
+    feedback.appendChild(newfb)
+  })
+  
+})
 
 async function main(){
   try{
     const projects = await fetchAllProjects()
     displayProjectOptions(projects)
+    const employees = await fetchAllEmployees()
+    displayAllEmployee(employees)
+    
 
     
 
