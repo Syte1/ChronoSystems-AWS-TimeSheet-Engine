@@ -7,6 +7,7 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="../js/navbar.js" defer></script>
+    <script src="../js/auth.js" defer></script>
     <link rel="stylesheet" href="../styles/profile.css">
     <title>Home</title>
 </head>
@@ -48,7 +49,7 @@
                 </div>
                 |
                 <div class="p-4 flex flex-row items-center justify-between">
-                    <a hidden=true id="navAdmin" href="./admin/admin.html"
+                    <a hidden="true" id="navAdmin" href="./admin/admin.html"
                         class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
                         Admin</a>
                 </div>
@@ -83,7 +84,7 @@
                                     href="#">Help</a>
                                 <div class="border-b"></div>
                                 <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                    href="https://employ.auth.us-west-2.amazoncognito.com/logout?client_id=6453ap20m2onbblmddon3llmdj&logout_uri=http://localhost:8080/logged_out.html">Logout</a>
+                                    href="../../index.html">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -104,7 +105,7 @@
                     href="./viewUnprocessedEntry.html">View Unprocessed Timesheets</a>
                 <a class="bg-main-color hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     href="./viewPaystub.html">View Paystub</a>
-                <a id="mainAdmin" hidden=true class="bg-main-color hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                <a id="mainAdmin" hidden="true" class="bg-main-color hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     href="./admin/admin.html">Admininstrative page</a>
             </div>
         </div>

@@ -39,6 +39,16 @@ function getSecureCookie(cookieName = 'token') {
   }
 }
 
+async function onLoginClick(){
+  try {
+    const user = document.getElementById("username").value;
+    const pw = document.getElementById("password").value;
+    const response = await signIn(user, pw);
+    console.log(`good: ${user}, ${pw}, ${response}`);
+  } catch (e){
+    console.log(e)
+  }
+}
 async function signIn(username, password) {
   const url = `${baseUrl}/signin`;
   const data = {body: {username: username, password: password}};
@@ -50,15 +60,18 @@ async function signIn(username, password) {
     },
     body: JSON.stringify(data),
   })
-    .then((response) => {
+    .then(async (response) => {
       if (response.ok) {
-        return response.json();
+        const res = await response.json();
+        console.log(res.body);
+        return res;
       } else {
         throw new Error('Login failed');
       }
     })
     .then((data) => {
-      setSecureCookie('token', data.AuthenticationResult.AccessToken, data.AuthenticationResult.ExpiresIn);
+      setSecureCookie('token', data.body.AuthenticationResult.AccessToken, data.body.AuthenticationResult.ExpiresIn);
+      window.location.href = "./html/home.html";
     })
     .catch((error) => {
       console.error(error);
