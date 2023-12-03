@@ -52,7 +52,7 @@
                   </div>
                   |
                   <div class="p-4 flex flex-row items-center justify-between">
-                      <a hidden=true id="navAdmin" href="./admin.html"
+                      <a hidden="true" id="navAdmin" href="./admin.html"
                           class="text-lg font-semibold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
                           Admin</a>
                   </div>
@@ -105,7 +105,7 @@
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Create New User</h5>
     </a>
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Onboard a new employee with this page</p>
-    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    <a href="./create_user.html" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         Go to Page
         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -115,32 +115,37 @@
 
 
     <!-- Card 2: View Employees Page -->
-    <a href="./viewEmployee.html" class="bg-white max-w-sm rounded overflow-hidden shadow-lg mx-4">
-      <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">View Employees</div>
-      </div>
-      <div class="px-6 py-4">
-        <button
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-green">
+    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <a href="./viewEmployee.html">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">View Employee</h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">View all employees and their paystub</p>
+      <a href="./viewEmployee.html" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Go to Page
-        </button>
-      </div>
-    </a>
+          <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+          </svg>
+      </a>
+  </div>
 
     <!-- Card 3: Add Project and Manage Project Page -->
-    <a href="./project.html" class="bg-white max-w-sm rounded overflow-hidden shadow-lg mx-4">
-      <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">Add Project and Manage Project</div>
-      </div>
-      <div class="px-6 py-4">
-        <button
-          class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo">
+    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <a href="./project.html">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Manage Project</h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Create new project and manage your current project</p>
+      <a href="./project.html" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Go to Page
-        </button>
-      </div>
-    </a>
+          <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+          </svg>
+      </a>
+  </div>
 
   </div>
+
+  <script src="../../js/navbar.js" defer></script>
+
 
 </body>
 

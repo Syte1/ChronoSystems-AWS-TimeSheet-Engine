@@ -9,9 +9,10 @@
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
   <script src="../../js/navbar.js" defer></script>
   <style>
-  .bg-main-color {
-    background-color: #4a76a8;
-  }</style>
+    .bg-main-color {
+      background-color: #4a76a8;
+    }
+  </style>
 </head>
 
 <body class="min-h-full mx-auto">
@@ -107,7 +108,7 @@
           </div>
       </div>
 
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto px-4 pt-12">
     <div class="space-y-12">
       <div class="space-y-10 divide-y divide-gray-900/10">
         <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
@@ -117,7 +118,11 @@
           </div>
 
           <form id="createNewUser" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-            <div class="container mx-auto mt-8 p-4"> <!-- Added p-4 for padding -->
+            <div class="container mx-auto mt-8 p-4 relative"> <!-- Added p-4 for padding -->
+              <div id="spinner" class="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <!-- You can replace this with your preferred spinner implementation -->
+                <div class="border-t-4 border-blue-500 border-solid rounded-full animate-spin h-12 w-12"></div>
+              </div>
 
               <!-- Name Row -->
               <div class="flex mb-4">
@@ -172,8 +177,9 @@
                 <div class="w-1/2">
                   <label for="role" class="block text-sm font-medium text-gray-600">Role</label>
                   <select id="role" name="role" class="mt-1 p-2 w-full border rounded-md">
-                    <option value="user">User</option>
+                    <option value="employee">Employee</option>
                     <option value="admin">Admin</option>
+                    <option value="manager">Manager</option>
                   </select>
                 </div>
               </div>
@@ -184,11 +190,12 @@
                 <input type="password" id="password" name="password" class="mt-1 p-2 w-full border rounded-md">
               </div>
               <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
-                <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Reset</button>
+                <button type="button" id="resetForm" class="text-sm font-semibold leading-6 text-gray-900">Reset</button>
                 <button type="submit"
                   class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
                   User</button>
               </div>
+              <div class="mb-6 block text-sm font-medium text-green-600" id="successMessage"></div>
             </div>
           </form>
         </div>
@@ -196,8 +203,7 @@
       </div>
     </div>
   </div>
-
-
+<script src="../../js/admin/create_user.js"></script>
 
 </body>
 
