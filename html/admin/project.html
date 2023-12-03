@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Project</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-full mx-auto">
+  <div class="container mx-auto px-4">
+
+    <div class="space-y-12">
+      <div class="space-y-10 divide-y divide-gray-900/10">
+        <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
+          <div class="px-4 sm:px-0">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Create Project</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">Create a project with a name and assign members to the
+              project
+            </p>
+          </div>
+
+          <form id="createProjectForm" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+            <div class="px-4 py-6 sm:p-8">
+              <div class="max-w-2xl space-y-10">
+                <fieldset>
+                  <div class="mb-4">
+                    <label for="projectName" class="block text-sm font-medium text-gray-600">Project Name</label>
+                    <input type="text" id="projectName" name="projectName" class="mt-1 p-2 w-full border rounded-md">
+                  </div>
+
+                  <!-- Assign Members -->
+                  <div class="mb-4">
+                    <label for="members" class="block text-sm font-medium text-gray-600">Assign Members</label>
+                    <select id="employees-select" name="members[]" multiple class="mt-1 p-2 w-full border rounded-md h-auto">
+                      <!-- Add more members as needed -->
+                    </select>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+              <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+              <button type="submit"
+                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
+                Project</button>
+            </div>
+            <div class="mb-4 p-4">
+              <p id="createMessage" class="text-sm font-medium text-gray-700"></p>
+            </div>
+          </form>
+          <!-- Separator (Horizontal Line) -->
+          <!-- <hr class="col-span-3 my-8 border-t border-gray-300"> -->
+
+
+        </div>
+        <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
+          <div>
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Manage Projects</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">Choose your project from the drop down and you can unassign
+              employees from it</p>
+          </div>
+
+          <form class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+            <!-- Project dropdown -->
+            <div class="mb-4 p-4">
+              <label for="project" class="block text-sm font-medium text-gray-700">Select Project</label>
+              <select id="project-select" name="project"
+                class="mt-1 p-2 block w-full border rounded-md bg-gray-100 focus:outline-none focus:ring focus:border-blue-300">
+                <!-- Add your project options dynamically here -->
+              </select>
+            </div>
+            <!-- Employee table -->
+            <div class="mb-4 p-4">
+              <label for="employees" class="block text-sm font-medium text-gray-700">Employees in Selected
+                Project</label>
+              <select id="project-employees-select" name="employees" multiple
+                class="mt-1 p-2 block w-full border rounded-md bg-gray-100 focus:outline-none focus:ring focus:border-blue-300">
+                <!-- Add your employees dynamically here based on the selected project -->
+                
+              </select>
+            </div>
+
+            <!-- Unassign Button -->
+            <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+              <button id="unassignEmployees" type="button" disabled="true"
+                class="rounded-md bg-gray-300 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
+                Unassign Selected Employees
+              </button>
+            </div>
+            <div id="unassignMessage" class="mb-4 p-4">
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../../js/admin/project.js"></script>
+</body>
+
+</html>

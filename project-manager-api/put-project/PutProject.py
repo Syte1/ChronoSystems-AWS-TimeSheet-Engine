@@ -13,7 +13,8 @@ def lambda_handler(event, context):
         addProject(entry)
         return {
             "statusCode": 200,
-            "message": f"{name} created."
+            "message": f"{name} created.",
+            "entry" : entry
         }
     except KeyError as err:
         print("Err")

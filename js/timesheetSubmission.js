@@ -321,10 +321,10 @@ async function handleTimesheetSubmission(uid) {
         }
     });
     clearResultDiv();
-    const prettyJson = document.createElement("pre");
-    DIV_RESULT.appendChild(prettyJson);
-    prettyJson.textContent = JSON.stringify(requestBody, undefined, 2);
-
+    // const prettyJson = document.createElement("pre");
+    // DIV_RESULT.appendChild(prettyJson);
+    // prettyJson.textContent = JSON.stringify(requestBody, undefined, 2);
+    displaySubmissionInfo(requestBody);
     return await apiRequest(ENDPOINT_EMPLOYEETIMESHEET_URL + ENDPOINT_EMPLOYEETIMESHEET_POSTWEEKS, HTTPMETHOD_POST, requestBody);
 }
 
@@ -363,6 +363,55 @@ async function handleProjectWeeksSubmission(uid) {
     }
 }
 
+function displaySubmissionInfo(data) {
+    const submissions = data.submission;
+    const skippedSubmissions = data.skipped_submission;
+
+    let submissionHTML = "<h4 class='text-lg font-bold mb-4'>Submission Information:</h4>";
+    submissionHTML += "<ul>";
+    submissions.forEach(submission => {
+        submissionHTML += `
+        <li>
+          <strong>Date:</strong> ${submission.date}<br>
+          <strong>Start Time:</strong> ${submission.start_time}<br>
+          <strong>End Time:</strong> ${submission.end_time}<br>
+          <strong>Break Duration:</strong> ${submission.break_duration} minutes
+        </li>
+      `;
+    });
+    submissionHTML += "</ul>";
+
+    let skippedSubmissionHTML = "<h4 class='text-lg font-bold mb-4'>Skipped Submission Information: </h4>";
+    skippedSubmissionHTML += "<ul>";
+    skippedSubmissions.forEach(skippedSubmission => {
+        skippedSubmissionHTML += `
+        <li>
+          <strong>Date:</strong> ${skippedSubmission.date}<br>
+          <strong>Start Time:</strong> ${skippedSubmission.start_time}<br>
+          <strong>End Time:</strong> ${skippedSubmission.end_time}<br>
+          <strong>Break Duration:</strong> ${skippedSubmission.break_duration} minutes
+        </li>
+      `;
+    });
+    skippedSubmissionHTML += "</ul>";
+
+    DIV_RESULT.innerHTML = submissionHTML + skippedSubmissionHTML;
+}
+
+function displayStatus(jsonObject, container, title) {
+    let propertiesHTML = `<h4 class='text-lg font-bold mb-4'>${title}</h4><ul>`;
+  
+    for (const property in jsonObject) {
+      if (jsonObject.hasOwnProperty(property)) {
+        propertiesHTML += `<li><strong>${property}:</strong> ${jsonObject[property]}</li>`;
+      }
+    }
+  
+    propertiesHTML += "</ul>";
+  
+    container.innerHTML = propertiesHTML + DIV_RESULT.innerHTML;
+  }
+
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         // const auth = cognito authentication manager;
@@ -395,7 +444,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         clearResultDiv();
                         DIV_RESULT.textContent = "Error submitting projectweeks.";
                     } else {
-                        DIV_RESULT.innerHTML = "Successfully submitted!" + DIV_RESULT.innerHTML;
+                        displayStatus(timesheetReponse, DIV_RESULT, "Response:");
                     }
                 });
             });
