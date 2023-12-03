@@ -57,6 +57,7 @@ async function displayuserPaystub(uid, full_name) {
         throw new Error(`Error: ${statusCode} ${message}`);
       }
       const tableBody = document.getElementById('paystub-table-body')
+      tableBody.innerHTML = '';
       Items.forEach(paystub => {
         const row = createPaystubRow(paystub, full_name);
         tableBody.appendChild(row); 

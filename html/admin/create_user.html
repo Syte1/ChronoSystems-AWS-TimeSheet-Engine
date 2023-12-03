@@ -7,105 +7,88 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="../../js/navbar.js" defer></script>
   <style>
-  .bg-main-color {
-    background-color: #4a76a8;
-  }</style>
+    .bg-main-color {
+      background-color: #4a76a8;
+    }
+  </style>
 </head>
 
 <body class="min-h-full mx-auto">
-  <!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
-        <!-- Navigation bar -->
-        <div class="w-full text-white bg-main-color">
-          <div x-data="{ open: false }"
-              class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
-              <div class="p-4 flex flex-row items-center justify-between">
-                  <a href="../home.html"
-                      class="text-lg font-bold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                      ChronoSystems</a>
-              </div>
-              |
-              <div class="p-4 flex flex-row items-center justify-between">
-                  <a href="../viewTimesheet.html"
-                      class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                      View</a>
-              </div>
-              |
-              <div class="p-4 flex flex-row items-center justify-between">
-                  <a href="../timesheetSubmission.html"
-                      class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                      Submit</a>
-              </div>
-              |
-              <div class="p-4 flex flex-row items-center justify-between">
-                  <a href="../viewPaystub.html"
-                      class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                      Paystub</a>
-              </div>
-              |
-              <div class="p-4 flex flex-row items-center justify-between">
-                  <a href="../profile.html"
-                      class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                      Profile</a>
-              </div>
-              |
-              <div class="p-4 flex flex-row items-center justify-between">
-                  <a hidden=true id="navAdmin" href="./admin.html"
-                      class="text-lg font-semibold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                      Admin</a>
-              </div>
-              <nav :class="{'flex': open, 'hidden': !open}"
-                  class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
-                  <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                      <button @click="open = !open"
-                          class="flex flex-row items-center space-x-2 w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent hover:bg-blue-800 md:w-auto md:inline md:mt-0 md:ml-4 hover:bg-gray-200 focus:bg-blue-800 focus:outline-none focus:shadow-outline">
-                          <span id="user-name">User</span>
-                          <img class="inline h-6 rounded-full"
-                              src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4">
-                          <svg fill="currentColor" viewBox="0 0 20 20"
-                              :class="{'rotate-180': open, 'rotate-0': !open}"
-                              class="inline w-4 h-4 transition-transform duration-200 transform">
-                              <path fill-rule="evenodd"
-                                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"></path>
-                          </svg>
-                      </button>
-                      <div x-show="open" x-transition:enter="transition ease-out duration-100"
-                          x-transition:enter-start="transform opacity-0 scale-95"
-                          x-transition:enter-end="transform opacity-100 scale-100"
-                          x-transition:leave="transition ease-in duration-75"
-                          x-transition:leave-start="transform opacity-100 scale-100"
-                          x-transition:leave-end="transform opacity-0 scale-95"
-                          class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                          <div
-                              class="py-2 bg-white text-blue-800 text-sm rounded-sm border border-main-color shadow-sm">
-                              <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                  href="#">Settings</a>
-                              <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                  href="#">Help</a>
-                              <div class="border-b"></div>
-                              <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                  href="https://employ.auth.us-west-2.amazoncognito.com/logout?client_id=6453ap20m2onbblmddon3llmdj&logout_uri=http://localhost:8080/logged_out.html">Logout</a>
-                          </div>
-                      </div>
-                  </div>
-              </nav>
-          </div>
+  <!-- Navigation bar -->
+  <div class="w-full text-white bg-main-color">
+    <div x-data="{ open: false }"
+      class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+      <div class="p-4 flex flex-row items-center justify-between">
+        <a href="../home.html"
+          class="text-lg font-bold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+          ChronoSystems</a>
       </div>
+      |
+      <div class="p-4 flex flex-row items-center justify-between">
+        <a href="../viewTimesheet.html"
+          class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+          View</a>
+      </div>
+      |
+      <div class="p-4 flex flex-row items-center justify-between">
+        <a href="../timesheetSubmission.html"
+          class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+          Submit</a>
+      </div>
+      |
+      <div class="p-4 flex flex-row items-center justify-between">
+        <a href="../viewPaystub.html"
+          class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+          Paystub</a>
+      </div>
+      |
+      <div class="p-4 flex flex-row items-center justify-between">
+        <a href="../profile.html"
+          class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+          Profile</a>
+      </div>
+      |
+      <div class="p-4 flex flex-row items-center justify-between">
+        <a hidden=true id="navAdmin" href="./admin.html"
+          class="text-lg font-semibold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+          Admin</a>
+      </div>
+      <nav :class="{'flex': open, 'hidden': !open}"
+        class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+          <button @click="open = !open"
+            class="flex flex-row items-center space-x-2 w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent hover:bg-blue-800 md:w-auto md:inline md:mt-0 md:ml-4 hover:bg-gray-200 focus:bg-blue-800 focus:outline-none focus:shadow-outline">
+            <span id="user-name">User</span>
+            <img class="inline h-6 rounded-full" src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4">
+            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+              class="inline w-4 h-4 transition-transform duration-200 transform">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <div x-show="open" x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="transform opacity-0 scale-95"
+            x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100"
+            x-transition:leave-end="transform opacity-0 scale-95"
+            class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+            <div class="py-2 bg-white text-blue-800 text-sm rounded-sm border border-main-color shadow-sm">
+              <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="#">Settings</a>
+              <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="#">Help</a>
+              <div class="border-b"></div>
+              <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="https://employ.auth.us-west-2.amazoncognito.com/logout?client_id=6453ap20m2onbblmddon3llmdj&logout_uri=http://localhost:8080/logged_out.html">Logout</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
 
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto px-4 pt-12">
     <div class="space-y-12">
       <div class="space-y-10 divide-y divide-gray-900/10">
         <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
@@ -115,7 +98,11 @@
           </div>
 
           <form id="createNewUser" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-            <div class="container mx-auto mt-8 p-4"> <!-- Added p-4 for padding -->
+            <div class="container mx-auto mt-8 p-4 relative"> <!-- Added p-4 for padding -->
+              <div id="spinner" class="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <!-- You can replace this with your preferred spinner implementation -->
+                <div class="border-t-4 border-blue-500 border-solid rounded-full animate-spin h-12 w-12"></div>
+              </div>
 
               <!-- Name Row -->
               <div class="flex mb-4">
@@ -170,8 +157,9 @@
                 <div class="w-1/2">
                   <label for="role" class="block text-sm font-medium text-gray-600">Role</label>
                   <select id="role" name="role" class="mt-1 p-2 w-full border rounded-md">
-                    <option value="user">User</option>
+                    <option value="employee">Employee</option>
                     <option value="admin">Admin</option>
+                    <option value="manager">Manager</option>
                   </select>
                 </div>
               </div>
@@ -182,11 +170,12 @@
                 <input type="password" id="password" name="password" class="mt-1 p-2 w-full border rounded-md">
               </div>
               <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
-                <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Reset</button>
+                <button type="button" id="resetForm" class="text-sm font-semibold leading-6 text-gray-900">Reset</button>
                 <button type="submit"
                   class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
                   User</button>
               </div>
+              <div class="mb-6 block text-sm font-medium text-green-600" id="successMessage"></div>
             </div>
           </form>
         </div>
@@ -194,8 +183,7 @@
       </div>
     </div>
   </div>
-
-
+<script src="../../js/admin/create_user.js"></script>
 
 </body>
 
