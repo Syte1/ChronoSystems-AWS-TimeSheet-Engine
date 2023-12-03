@@ -13,6 +13,7 @@
 
 <body>
     <div class="bg-gray-100">
+        <!-- Navigation bar -->
         <div class="w-full text-white bg-main-color">
             <div x-data="{ open: false }"
                 class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
@@ -20,96 +21,36 @@
                     <a href="./home.html"
                         class="text-lg font-bold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
                         ChronoSystems</a>
-                    <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                            <path x-show="!open" fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"></path>
-                            <path x-show="open" fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
                 </div>
                 |
                 <div class="p-4 flex flex-row items-center justify-between">
                     <a href="./viewTimesheet.html"
                         class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
                         View</a>
-                    <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                            <path x-show="!open" fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"></path>
-                            <path x-show="open" fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
                 </div>
                 |
                 <div class="p-4 flex flex-row items-center justify-between">
                     <a href="./timesheetSubmission.html"
                         class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
                         Submit</a>
-                    <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                            <path x-show="!open" fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"></path>
-                            <path x-show="open" fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
                 </div>
                 |
                 <div class="p-4 flex flex-row items-center justify-between">
                     <a href="./viewPaystub.html"
                         class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
                         Paystub</a>
-                    <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                            <path x-show="!open" fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"></path>
-                            <path x-show="open" fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
                 </div>
                 |
                 <div class="p-4 flex flex-row items-center justify-between">
                     <a href="./profile.html"
                         class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
                         Profile</a>
-                    <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                            <path x-show="!open" fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"></path>
-                            <path x-show="open" fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
                 </div>
                 |
                 <div class="p-4 flex flex-row items-center justify-between">
-                    <a href="./admin.html"
+                    <a hidden=true id="navAdmin" href="./admin/admin.html"
                         class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
                         Admin</a>
-                    <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                            <path x-show="!open" fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"></path>
-                            <path x-show="open" fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
                 </div>
                 <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
@@ -149,9 +90,24 @@
                 </nav>
             </div>
         </div>
-        <!-- End of Navbar -->
+        <!-- Navigation bar end -->
         <!-- Start of body-->
-
+        <div id="body" class="py-10 grid-cols-1">
+            <h1 class="text-lg text-4xl tracking-widest text-center rounded-lg focus:outline-none focus:shadow-outline">Welcome to ChronoSystems</h1>
+            <h3 class="text-lg text-black tracking-widest text-center rounded-lg focus:outline-none focus:shadow-outline pb-20">Your timesheet tracker</h3>
+            <div id="divButtons" class="pl-5 pr-5 grid grid-cols-3 gap-4">
+                <a class="bg-main-color hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    href="./profile.html">Profile</a>
+                <a class="bg-main-color hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    href="./viewTimesheet.html">View Timesheets</a>
+                <a class="bg-main-color hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    href="./viewUnprocessedEntry.html">View Unprocessed Timesheets</a>
+                <a class="bg-main-color hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    href="./viewPaystub.html">View Paystub</a>
+                <a id="mainAdmin" hidden=true class="bg-main-color hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    href="./admin/admin.html">Admininstrative page</a>
+            </div>
+        </div>
         <!-- End of body-->
     </div>
 </body>
