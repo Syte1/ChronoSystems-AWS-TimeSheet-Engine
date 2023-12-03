@@ -117,11 +117,11 @@
     </table>
 <script>
     //Hard coded uid for now
-    fetch('https://s2z6h094ph.execute-api.us-west-2.amazonaws.com/test?uid=123&start_period=01/01/2023&end_period=01/15/2023')
+    fetch('https://s2z6h094ph.execute-api.us-west-2.amazonaws.com/test?uid=2&start_period=01/01/2023&end_period=01/15/2023')
         .then(response => response.json())
         .then(data => {
             var table = document.getElementById('paystubTable');
-            var item = data.Item;
+            var item = data;
             var row = `<tr>
                             <td>${item.start_period}</td>
                             <td>${item.end_period}</td>
