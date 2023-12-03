@@ -16,20 +16,6 @@
 </head>
 
 <body class="min-h-full mx-auto">
-  <!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
         <!-- Navigation bar -->
         <div class="w-full text-white bg-main-color">
           <div x-data="{ open: false }"
@@ -65,7 +51,7 @@
               </div>
               |
               <div class="p-4 flex flex-row items-center justify-between">
-                  <a hidden=true id="navAdmin" href="./admin.html"
+                  <a hidden="true" id="navAdmin" href="./admin.html"
                       class="text-lg font-semibold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
                       Admin</a>
               </div>
