@@ -200,7 +200,9 @@
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        const employeeId = 1 //document.getElementById('employeeId').value;
+        // const employeeId = 1 //document.getElementById('employeeId').value;
+        const employeeId = sessionStorage.getItem('user-id');
+        console.log(employeeId)
 
         // Convert dates to the expected format
         const startDate = convertDateFormat(document.getElementById('startDate').value);
