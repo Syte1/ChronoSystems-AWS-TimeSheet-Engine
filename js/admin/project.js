@@ -155,14 +155,6 @@ function displayMembers(members){
   })
 }
 
-function createEmployeeSelect(member){
-  const {uid, full_name} = member
-  const option = document.createElement('option');
-  option.value = uid
-  option.textContent = full_name
-  return option;
-}
-
 async function fetchEmployeeName(uid){
   try{
     const result = await fetch(`${employeeApi}/profile?uid=${uid}`);
@@ -177,7 +169,6 @@ async function fetchEmployeeName(uid){
     console.error(err)
     return err
   }
-
 }
 
 
@@ -222,8 +213,8 @@ function unassignEmployees(projectId, uids){
   })
 }
 
-function displayAllEmployee(employees){
-  const employeeSelect = document.getElementById('employees-select')
+function displayAllEmployee(employees, elementId = 'employees-select'){
+  const employeeSelect = document.getElementById(elementId)
     const employees_with_name = employees.map(employee => {
       const full_name = `${employee.name} ${employee.lname}`
       return {...employee, full_name}

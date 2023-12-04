@@ -2,148 +2,209 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Page</title>
-  <!-- Include the Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-  <script src="../../js/navbar.js" defer></script>
-<style>
-.bg-main-color {
-  background-color: #4a76a8;
-}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <!-- Include the Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="../../js/navbar.js" defer></script>
+    <style>
+        .bg-main-color {
+            background-color: #4a76a8;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100">
-        <!-- Navigation bar -->
-          <div class="w-full text-white bg-main-color">
-              <div x-data="{ open: false }"
-                  class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
-                  <div class="p-4 flex flex-row items-center justify-between">
-                      <a href="../home.html"
-                          class="text-lg font-bold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                          ChronoSystems</a>
-                  </div>
-                  |
-                  <div class="p-4 flex flex-row items-center justify-between">
-                      <a href="../viewTimesheet.html"
-                          class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                          View</a>
-                  </div>
-                  |
-                  <div class="p-4 flex flex-row items-center justify-between">
-                      <a href="../timesheetSubmission.html"
-                          class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                          Submit</a>
-                  </div>
-                  |
-                  <div class="p-4 flex flex-row items-center justify-between">
-                      <a href="../viewPaystub.html"
-                          class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                          Paystub</a>
-                  </div>
-                  |
-                  <div class="p-4 flex flex-row items-center justify-between">
-                      <a href="../profile.html"
-                          class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                          Profile</a>
-                  </div>
-                  |
-                  <div class="p-4 flex flex-row items-center justify-between">
-                      <a hidden="true" id="navAdmin" href="./admin.html"
-                          class="text-lg font-semibold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
-                          Admin</a>
-                  </div>
-                  <nav :class="{'flex': open, 'hidden': !open}"
-                      class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
-                      <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                          <button @click="open = !open"
-                              class="flex flex-row items-center space-x-2 w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent hover:bg-blue-800 md:w-auto md:inline md:mt-0 md:ml-4 hover:bg-gray-200 focus:bg-blue-800 focus:outline-none focus:shadow-outline">
-                              <span id="user-name">User</span>
-                              <img class="inline h-6 rounded-full"
-                                  src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4">
-                              <svg fill="currentColor" viewBox="0 0 20 20"
-                                  :class="{'rotate-180': open, 'rotate-0': !open}"
-                                  class="inline w-4 h-4 transition-transform duration-200 transform">
-                                  <path fill-rule="evenodd"
-                                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                      clip-rule="evenodd"></path>
-                              </svg>
-                          </button>
-                          <div x-show="open" x-transition:enter="transition ease-out duration-100"
-                              x-transition:enter-start="transform opacity-0 scale-95"
-                              x-transition:enter-end="transform opacity-100 scale-100"
-                              x-transition:leave="transition ease-in duration-75"
-                              x-transition:leave-start="transform opacity-100 scale-100"
-                              x-transition:leave-end="transform opacity-0 scale-95"
-                              class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                              <div
-                                  class="py-2 bg-white text-blue-800 text-sm rounded-sm border border-main-color shadow-sm">
-                                  <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                      href="#">Settings</a>
-                                  <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                      href="#">Help</a>
-                                  <div class="border-b"></div>
-                                  <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                      href="../../index.html">Logout</a>
-                              </div>
-                          </div>
-                      </div>
-                  </nav>
-              </div>
+    <!-- Navigation bar -->
+    <div class="w-full text-white bg-main-color">
+        <div x-data="{ open: false }"
+            class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+            <div class="p-4 flex flex-row items-center justify-between">
+                <a href="../home.html"
+                    class="text-lg font-bold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+                    ChronoSystems</a>
+            </div>
+            |
+            <div class="p-4 flex flex-row items-center justify-between">
+                <a href="../viewTimesheet.html"
+                    class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+                    View</a>
+            </div>
+            |
+            <div class="p-4 flex flex-row items-center justify-between">
+                <a href="../timesheetSubmission.html"
+                    class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+                    Submit</a>
+            </div>
+            |
+            <div class="p-4 flex flex-row items-center justify-between">
+                <a href="../viewPaystub.html"
+                    class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+                    Paystub</a>
+            </div>
+            |
+            <div class="p-4 flex flex-row items-center justify-between">
+                <a href="../profile.html"
+                    class="text-lg font-normal tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+                    Profile</a>
+            </div>
+            |
+            <div class="p-4 flex flex-row items-center justify-between">
+                <a hidden="true" id="navAdmin" href="./admin.html"
+                    class="text-lg font-semibold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
+                    Admin</a>
+            </div>
+            <nav :class="{'flex': open, 'hidden': !open}"
+                class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+                <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                    <button @click="open = !open"
+                        class="flex flex-row items-center space-x-2 w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent hover:bg-blue-800 md:w-auto md:inline md:mt-0 md:ml-4 hover:bg-gray-200 focus:bg-blue-800 focus:outline-none focus:shadow-outline">
+                        <span id="user-name">User</span>
+                        <img class="inline h-6 rounded-full"
+                            src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4">
+                        <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+                            class="inline w-4 h-4 transition-transform duration-200 transform">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+                        <div class="py-2 bg-white text-blue-800 text-sm rounded-sm border border-main-color shadow-sm">
+                            <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                href="#">Settings</a>
+                            <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                href="#">Help</a>
+                            <div class="border-b"></div>
+                            <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                href="../../index.html">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div id="main" class="container mx-auto justify-center relative">
+        <div id="spinner" class="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <!-- You can replace this with your preferred spinner implementation -->
+            <div class="border-t-4 border-blue-500 border-solid rounded-full animate-spin h-12 w-12"></div>
           </div>
+        <div class="container mx-auto my-8 flex justify-center">
 
-  <div class="container mx-auto my-8 flex justify-center">
-
-    <!-- Card 1: Add Employee and Paystub Page -->
-    
-
-<div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <a href="./create_user.html">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Create New User</h5>
-    </a>
-    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Onboard a new employee with this page</p>
-    <a href="./create_user.html" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Go to Page
-        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-        </svg>
-    </a>
-</div>
+            <!-- Card 1: Add Employee and Paystub Page -->
 
 
-    <!-- Card 2: View Employees Page -->
-    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="./viewEmployee.html">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">View Employee</h5>
-      </a>
-      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">View all employees and their paystub</p>
-      <a href="./viewEmployee.html" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          Go to Page
-          <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-          </svg>
-      </a>
-  </div>
+            <div
+                class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a href="./create_user.html">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Create New User
+                    </h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Onboard a new employee with this page</p>
+                <a href="./create_user.html"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Go to Page
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            </div>
 
-    <!-- Card 3: Add Project and Manage Project Page -->
-    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="./project.html">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Manage Project</h5>
-      </a>
-      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Create new project and manage your current project</p>
-      <a href="./project.html" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          Go to Page
-          <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-          </svg>
-      </a>
-  </div>
 
-  </div>
+            <!-- Card 2: View Employees Page -->
+            <div
+                class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a href="./viewEmployee.html">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">View Employee</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">View all employees and their paystub</p>
+                <a href="./viewEmployee.html"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Go to Page
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            </div>
 
+            <!-- Card 3: Add Project and Manage Project Page -->
+            <div
+                class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a href="./project.html">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Manage Project</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Create new project and manage your current
+                    project</p>
+                <a href="./project.html"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Go to Page
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            </div>
+
+
+
+        </div>
+
+        <div class="container mx-auto my-8 border-b border-gray-200 pb-5 sm:flex sm:items-center sm:justify-between">
+
+            <h3 class="text-base font-semibold leading-6 text-gray-900">Process Payroll</h3>
+            <div class="mt-3 sm:ml-4 sm:mt-0">
+                <button id="processPayroll" type="button"
+                    class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
+                    new payroll</button>
+            </div>
+
+        </div>
+                <form>
+                    <!-- Start Date -->
+                    <div class="mb-4">
+                        <label for="start_date" class="block text-sm font-medium text-gray-600">Start Date</label>
+                        <input type="date" id="start_date" name="start_date" class="mt-1 p-2 w-full border rounded-md">
+                    </div>
+        
+                    <!-- End Date -->
+                    <div class="mb-4">
+                        <label for="end_date" class="block text-sm font-medium text-gray-600">End Date</label>
+                        <input type="date" id="end_date" name="end_date" class="mt-1 p-2 w-full border rounded-md">
+                    </div>
+        
+                    <!-- User Select Dropdown -->
+                    <div class="mb-4">
+                        <label for="employee_select" class="block text-sm font-medium text-gray-600">Employee</label>
+                        <select id="employee_select" name="employee_select" class="mt-1 p-2 w-full border rounded-md">
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+        
+                    <div class="mb-4">
+                        <p id="success_message" class="text-green-500 font-medium text-sm"></p>
+                        <p id="error_message" class="text-red-500 font-medium text-sm"></p>
+                    </div>
+                    
+                </form>
+        
+    </div>
+
+<script src="../../js/admin/admin.js"></script>
 
 </body>
 
