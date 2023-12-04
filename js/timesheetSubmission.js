@@ -1,4 +1,4 @@
-import { verifyToken } from "./auth";
+import { verifyToken } from "./auth.js";
 
 const ENDPOINT_EMPLOYEETIMESHEET_URL = "https://oxtwzrrqrg.execute-api.us-west-2.amazonaws.com/development";
 const ENDPOINT_PROJECTMANAGER_URL = "https://9zsjgjfqlh.execute-api.us-west-2.amazonaws.com/development";
@@ -417,16 +417,19 @@ function displayStatus(jsonObject, container, title) {
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         const auth = await verifyToken();
-        
+
         if (auth.valid) {
             const uid = auth.userId;
+            // const uid = "1";
             generateWeekChoices();
             const [assignedProjects, errorAssignedProjects] = await handleErrors(getAssignedProjects(uid));
             const [workingWeeks, errorWorkingWeeks] = await handleErrors(getWeeks());
+            console.log(assignedProjects);
+            console.log(workingWeeks);
 
-            if (errorAssignedProjects) {
+            if (assignedProjects == undefined || errorAssignedProjects) {
                 clearResultDiv();
-                DIV_RESULT.textContent = "Error retrieving assigned projects.";
+                DIV_RESULT.textContent = "No projects assigned, speak to a manager.";
             } else if (errorWorkingWeeks) {
                 clearResultDiv();
                 DIV_RESULT.textContent = "Error retrieving working weeks.";
@@ -434,7 +437,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 document.getElementById(ID_WEEKCHOICE_BUTTON).addEventListener("click", (event) => {
                     event.preventDefault()
                     handleWeekChoice(workingWeeks, assignedProjects);
-                    submitTimeSheetButton = createButtonTimesheetForm();
+                    const submitTimeSheetButton = createButtonTimesheetForm();
 
                     submitTimeSheetButton.addEventListener("click", async (event) => {
                         event.preventDefault();
@@ -454,7 +457,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         } else {
             alert("Not authorised.");
-            window.location.href = "./html/login.html";
+            // window.location.href = "../index.html";
         }
     } catch (error) {
         clearResultDiv();

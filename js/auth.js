@@ -9,11 +9,13 @@ export async function verifyToken() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ token }),
+      body: JSON.stringify({ id: token }),
     });
 
     if (response.ok) {
       const data = await response.json();
+
+      console.log(response);
       console.log(data);
       const userId = data.body.username;
 
@@ -39,17 +41,18 @@ function getSecureCookie(cookieName = 'token') {
   }
 }
 
-async function onLoginClick(){
-  try {
-    const user = document.getElementById("username").value;
-    const pw = document.getElementById("password").value;
-    const response = await signIn(user, pw);
-    console.log(`good: ${user}, ${pw}, ${response}`);
-  } catch (e){
-    console.log(e)
-  }
-}
-async function signIn(username, password) {
+// async function onLoginClick(){
+//   try {
+//     const user = document.getElementById("username").value;
+//     const pw = document.getElementById("password").value;
+//     const response = await signIn(user, pw);
+//     console.log(`good: ${user}, ${pw}, ${response}`);
+//   } catch (e){
+//     console.log(e)
+//   }
+// }
+
+export async function signIn(username, password) {
   const url = `${baseUrl}/signin`;
   const data = {body: {username: username, password: password}};
 
@@ -92,7 +95,7 @@ async function signIn(username, password) {
   "password": "TempPass123!"
 }
 */
-async function signUp(userDetails) {
+export async function signUp(userDetails) {
   const url = `${baseUrl}/signup`;
 
   return fetch(url, {

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./js/auth.js" defer></script>
+    <!-- <script src="./js/auth.js" defer></script> -->
 </head>
 
 <body class="h-full bg-gradient-to-l from-blue-300 to-aqua-100">
@@ -43,8 +43,7 @@
                 </div>
 
                 <div>
-                    <button type="button"
-                        onclick="onLoginClick()"
+                    <button id="button_login" type="button"
                         class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
                 </div>
             </form>
@@ -52,8 +51,7 @@
         </div>
         
     </div>
-
-
+<script type="module" src="./js/index.js"></script>
 </body>
 
 </html>
