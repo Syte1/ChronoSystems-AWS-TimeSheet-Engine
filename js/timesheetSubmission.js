@@ -1,3 +1,5 @@
+import { verifyToken } from "./auth";
+
 const ENDPOINT_EMPLOYEETIMESHEET_URL = "https://oxtwzrrqrg.execute-api.us-west-2.amazonaws.com/development";
 const ENDPOINT_PROJECTMANAGER_URL = "https://9zsjgjfqlh.execute-api.us-west-2.amazonaws.com/development";
 const ENDPOINT_EMPLOYEETIMESHEET_GETWEEKS = "/getWeeks";
@@ -275,13 +277,13 @@ function formatTime(timeString) {
 function isValidTime(timeString) {
     const timeRegex = /^(0?[1-9]|1[0-2]):([0-5][0-9]) (AM|PM)$/i;
     return timeRegex.test(timeString);
-  }
+}
 
 function isValidBreakTime(breakTime) {
-  const breakTimeInt = parseInt(breakTime, 10);
+    const breakTimeInt = parseInt(breakTime, 10);
 
-  // Check if the input is a positive integer
-  return !isNaN(breakTimeInt) && breakTimeInt >= 0;
+    // Check if the input is a positive integer
+    return !isNaN(breakTimeInt) && breakTimeInt >= 0;
 }
 
 function isValidDate(date) {
@@ -400,54 +402,59 @@ function displaySubmissionInfo(data) {
 
 function displayStatus(jsonObject, container, title) {
     let propertiesHTML = `<h4 class='text-lg font-bold mb-4'>${title}</h4><ul>`;
-  
+
     for (const property in jsonObject) {
-      if (jsonObject.hasOwnProperty(property)) {
-        propertiesHTML += `<li><strong>${property}:</strong> ${jsonObject[property]}</li>`;
-      }
+        if (jsonObject.hasOwnProperty(property)) {
+            propertiesHTML += `<li><strong>${property}:</strong> ${jsonObject[property]}</li>`;
+        }
     }
-  
+
     propertiesHTML += "</ul>";
-  
+
     container.innerHTML = propertiesHTML + DIV_RESULT.innerHTML;
-  }
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        // const auth = cognito authentication manager;
-        // const uid = auth.uid; // call 
-        const uid = "1";
-        generateWeekChoices();
-        const [assignedProjects, errorAssignedProjects] = await handleErrors(getAssignedProjects(uid));
-        const [workingWeeks, errorWorkingWeeks] = await handleErrors(getWeeks());
+        const auth = await verifyToken();
         
-        if (errorAssignedProjects) {
-            clearResultDiv();
-            DIV_RESULT.textContent = "Error retrieving assigned projects.";
-        } else if (errorWorkingWeeks) {
-            clearResultDiv();
-            DIV_RESULT.textContent = "Error retrieving working weeks.";
-        } else {
-            document.getElementById(ID_WEEKCHOICE_BUTTON).addEventListener("click", (event) => {
-                event.preventDefault()
-                handleWeekChoice(workingWeeks, assignedProjects);
-                submitTimeSheetButton = createButtonTimesheetForm();
+        if (auth.valid) {
+            const uid = auth.userId;
+            generateWeekChoices();
+            const [assignedProjects, errorAssignedProjects] = await handleErrors(getAssignedProjects(uid));
+            const [workingWeeks, errorWorkingWeeks] = await handleErrors(getWeeks());
 
-                submitTimeSheetButton.addEventListener("click", async (event) => {
-                    event.preventDefault();
-                    const [timesheetReponse, errorTimesheet] = await handleErrors(handleTimesheetSubmission(uid));
-                    const [projectWeeksResponse, errorProjectWeeksResponse] = await handleErrors(handleProjectWeeksSubmission(uid));
-                    if (errorTimesheet) {
-                        clearResultDiv();
-                        DIV_RESULT.textContent = "Error submitting timesheet.";
-                    } else if (errorProjectWeeksResponse) {
-                        clearResultDiv();
-                        DIV_RESULT.textContent = "Error submitting projectweeks.";
-                    } else {
-                        displayStatus(timesheetReponse, DIV_RESULT, "Response:");
-                    }
+            if (errorAssignedProjects) {
+                clearResultDiv();
+                DIV_RESULT.textContent = "Error retrieving assigned projects.";
+            } else if (errorWorkingWeeks) {
+                clearResultDiv();
+                DIV_RESULT.textContent = "Error retrieving working weeks.";
+            } else {
+                document.getElementById(ID_WEEKCHOICE_BUTTON).addEventListener("click", (event) => {
+                    event.preventDefault()
+                    handleWeekChoice(workingWeeks, assignedProjects);
+                    submitTimeSheetButton = createButtonTimesheetForm();
+
+                    submitTimeSheetButton.addEventListener("click", async (event) => {
+                        event.preventDefault();
+                        const [timesheetReponse, errorTimesheet] = await handleErrors(handleTimesheetSubmission(uid));
+                        const [projectWeeksResponse, errorProjectWeeksResponse] = await handleErrors(handleProjectWeeksSubmission(uid));
+                        if (errorTimesheet) {
+                            clearResultDiv();
+                            DIV_RESULT.textContent = "Error submitting timesheet.";
+                        } else if (errorProjectWeeksResponse) {
+                            clearResultDiv();
+                            DIV_RESULT.textContent = "Error submitting projectweeks.";
+                        } else {
+                            displayStatus(timesheetReponse, DIV_RESULT, "Response:");
+                        }
+                    });
                 });
-            });
+            }
+        } else {
+            alert("Not authorised.");
+            window.location.href = "./html/login.html";
         }
     } catch (error) {
         clearResultDiv();
