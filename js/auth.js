@@ -1,7 +1,7 @@
 const baseUrl = 'https://y7aq7em2t6.execute-api.us-west-2.amazonaws.com/test';
 
 // Function to call the API endpoint for token verification
-export async function verifyToken() {
+async function verifyToken() {
   let token = getSecureCookie();
   try {
     const response = await fetch(`${baseUrl}/validate-jwt`, {
