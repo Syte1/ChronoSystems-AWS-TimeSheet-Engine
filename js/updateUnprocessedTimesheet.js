@@ -1,4 +1,4 @@
-import { verifyToken } from "./auth";
+import { verifyToken } from "./auth.js";
 
 // ENDPOINTS
 const ENDPOINT_CENTRALAPI_URL = "https://y7aq7em2t6.execute-api.us-west-2.amazonaws.com/test";
@@ -276,27 +276,35 @@ function displayStatus(jsonObject, container, title) {
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         const auth = await verifyToken();
-        
+
         if (auth.valid) {
             const uid = auth.userId;
+            // const uid = "1";
             const [unprocessedEntries, unprocessedEntriesError] = await handleErrors(getUnprocessedEntries(uid));
-            generateUpdateTimesheetForm(unprocessedEntries);
+            console.log(unprocessedEntries);
+
+            if (unprocessedEntries.length <= 0) {
+                clearResultDiv();
+                DIV_RESULT.textContent = "All entries have been processed, speak to a manager.";
+            } else {
+                generateUpdateTimesheetForm(unprocessedEntries);
     
-            submitTimeSheetButton = createButtonTimesheetForm();
-    
-            submitTimeSheetButton.addEventListener("click", async (event) => {
-                event.preventDefault();
-                const [timesheetReponse, errorTimesheet] = await handleErrors(handleTimesheetSubmission(uid));
-                if (errorTimesheet) {
-                    clearResultDiv();
-                    DIV_RESULT.textContent = "Error submitting timesheet.";
-                } else {
-                    displayStatus(timesheetReponse, DIV_RESULT, "Response:");
-                }
-            });
+                const submitTimeSheetButton = createButtonTimesheetForm();
+        
+                submitTimeSheetButton.addEventListener("click", async (event) => {
+                    event.preventDefault();
+                    const [timesheetReponse, errorTimesheet] = await handleErrors(handleTimesheetSubmission(uid));
+                    if (errorTimesheet) {
+                        clearResultDiv();
+                        DIV_RESULT.textContent = "Error submitting timesheet.";
+                    } else {
+                        displayStatus(timesheetReponse, DIV_RESULT, "Response:");
+                    }
+                });
+            }
         } else {
             alert("Not authorised.");
-            window.location.href = "./html/login.html";
+            // window.location.href = "../index.html";
         }
     } catch (error) {
         clearResultDiv();
