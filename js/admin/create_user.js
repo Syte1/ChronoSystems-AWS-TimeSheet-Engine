@@ -1,5 +1,6 @@
 const createForm = document.getElementById('createNewUser')
 const signUpAPI = 'https://y7aq7em2t6.execute-api.us-west-2.amazonaws.com/test'
+const profileAPI = 'https://fqov6b86hi.execute-api.us-east-2.amazonaws.com/v1';
 const feedback = document.getElementById('successMessage')
 const spinner = document.getElementById('spinner')
 
@@ -27,6 +28,33 @@ createForm.addEventListener('submit', async (e) => {
     wage,
     role,
     password
+  }
+  
+  // formatting for profileAPI
+  const name = given_name;
+  const uid = preferred_username;
+  const lname = family_name;
+  const permAddress = address;
+  const contact = phone_number;
+  const birthday = birthdate;
+
+  const profileData = {
+    uid,
+    name,
+    wage,
+    role,
+    lname,
+    address,
+    permAddress,
+    contact,
+    birthday,
+    email
+  }
+
+  try {
+    await addToProfileTable(profileData);
+  } catch (_) {
+    //do nothing
   }
 
   try {
@@ -70,6 +98,21 @@ async function createUser(body) {
   }
 }
 
+async function addToProfileTable(body)  {
+  try {
+    console.log(`fetching with route: ${profileAPI}/profile`)
+    const res = await fetch(`${profileAPI}/profile`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+  } catch (err) {
+    console.log("err");
+    throw new Error(`Error fetching...${err.message}`)
+  }
+}
 //attach reset form to button
 const resetButton = document.getElementById('resetForm')
 
