@@ -117,26 +117,7 @@
             <th>Pay</th>
         </tr>
     </table>
-<script>
-    //Hard coded uid for now
-    const uid = sessionStorage.getItem("user-name");
-    fetch(`https://s2z6h094ph.execute-api.us-west-2.amazonaws.com/test?uid=${uid}&start_period=01/01/2023&end_period=01/15/2023`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.item != undefined){
-                var table = document.getElementById('paystubTable');
-            var item = data;
-            var row = `<tr>
-                            <td>${item.start_period}</td>
-                            <td>${item.end_period}</td>
-                            <td>${item.uid}</td>
-                            <td>${item.pay}</td>
-                        </tr>`
-            table.innerHTML += row;
-            }
-
-        })
-        .catch(error => console.error('Error:', error));
+<script src="../js/viewPaystub.js">
 </script>
 </body>
 </html>
