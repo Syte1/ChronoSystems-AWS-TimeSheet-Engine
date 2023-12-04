@@ -24,6 +24,7 @@ artifacts:
     - appspec.yml
     - scripts/**/*
     - styles/*
+    - html/admin/*
   discard-paths: no
 
 cache:
