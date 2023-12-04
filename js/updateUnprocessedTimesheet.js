@@ -1,3 +1,5 @@
+import { verifyToken } from "./auth";
+
 // ENDPOINTS
 const ENDPOINT_CENTRALAPI_URL = "https://y7aq7em2t6.execute-api.us-west-2.amazonaws.com/test";
 const ENDPOINT_CENTRALAPI_POSTWEEKS = "/employeetimesheet"
@@ -273,25 +275,29 @@ function displayStatus(jsonObject, container, title) {
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        // const auth = cognito authentication manager;
-        // const uid = auth.uid; // call 
-        const uid = "1";
-
-        const [unprocessedEntries, unprocessedEntriesError] = await handleErrors(getUnprocessedEntries(uid));
-        generateUpdateTimesheetForm(unprocessedEntries);
-
-        submitTimeSheetButton = createButtonTimesheetForm();
-
-        submitTimeSheetButton.addEventListener("click", async (event) => {
-            event.preventDefault();
-            const [timesheetReponse, errorTimesheet] = await handleErrors(handleTimesheetSubmission(uid));
-            if (errorTimesheet) {
-                clearResultDiv();
-                DIV_RESULT.textContent = "Error submitting timesheet.";
-            } else {
-                displayStatus(timesheetReponse, DIV_RESULT, "Response:");
-            }
-        });
+        const auth = await verifyToken();
+        
+        if (auth.valid) {
+            const uid = auth.userId;
+            const [unprocessedEntries, unprocessedEntriesError] = await handleErrors(getUnprocessedEntries(uid));
+            generateUpdateTimesheetForm(unprocessedEntries);
+    
+            submitTimeSheetButton = createButtonTimesheetForm();
+    
+            submitTimeSheetButton.addEventListener("click", async (event) => {
+                event.preventDefault();
+                const [timesheetReponse, errorTimesheet] = await handleErrors(handleTimesheetSubmission(uid));
+                if (errorTimesheet) {
+                    clearResultDiv();
+                    DIV_RESULT.textContent = "Error submitting timesheet.";
+                } else {
+                    displayStatus(timesheetReponse, DIV_RESULT, "Response:");
+                }
+            });
+        } else {
+            alert("Not authorised.");
+            window.location.href = "./html/login.html";
+        }
     } catch (error) {
         clearResultDiv();
         console.error("Error: ", error.message);
