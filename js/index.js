@@ -1,5 +1,9 @@
 import { signIn } from "./auth.js";
 
+//reset sessionstorage
+sessionStorage.setItem("username", "");
+sessionStorage.setItem("user-id", "");
+
 async function onLoginClick(){
     try {
       const user = document.getElementById("username").value;

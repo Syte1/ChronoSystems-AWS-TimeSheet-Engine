@@ -5,8 +5,9 @@ let testUid = "2";
 async function initialLoad(){
     //sessionStorage.setItem("uid", "2"); // Ideally, we'd have a cookie that stores the priviledge of user somewhere
     //const currentUser = sessionStorage.getItem("uid");
-    const currentUser = await checkSessionStorage().userId;
-    if (currentUser == "shuang" || currentUser == "shuangchun"){
+    const currentUser = await checkSessionStorage();
+    console.log("res",currentUser);
+    if (currentUser == "shuang" || currentUser == "shuangchun" || currentUser == "Andy" || currentUser == "Andy1"){
         document.getElementById("navAdmin").hidden = false;
 
         // This one is for main landing page, didn't feel like making another js file for this
@@ -60,15 +61,15 @@ function getSecureCookie(cookieName = 'token') {
 
 //populate name 
 async function checkSessionStorage() {
-    const name = sessionStorage.getItem("user-name");
-    sessionStorage.setItem("user-name", "");
+    const name = sessionStorage.getItem("user-id");
     if (name == undefined || name == ""){
         const response = await verifyToken();
         testUid = response.userId;
+        sessionStorage.setItem("user-id", testUid);
         await fetchUsername();
-        return response;
+        return response.userId;
     } else {
-        divName.innerText = name;
+        divName.innerText = sessionStorage.getItem("username");
         return name;
     }
 }
@@ -78,9 +79,15 @@ async function fetchUsername(){
     fetch(`https://fqov6b86hi.execute-api.us-east-2.amazonaws.com/v1/profile?uid=${testUid}`)
         .then(response => response.json())
         .then(data => {
-            sessionStorage.setItem("user-name", data.item.name);
+          console.log(data);
+          if (testUid == "shuangchun"){
+            divName.innerText = "shaung"
+            sessionStorage.setItem("user-name", "shaung");
+          } else {
             divName.innerText = data.item.name;
-            console.log(`role: ${data.item.role}`)
+            sessionStorage.setItem("username", data.item.name);
+          }
+
         })
         .catch(error => {console.error('Error:', error);
         //window.location.replace("../index.html");
