@@ -1,5 +1,5 @@
 const baseUrl = 'https://y7aq7em2t6.execute-api.us-west-2.amazonaws.com/test';
-
+export {verifyToken}
 // Function to call the API endpoint for token verification
 async function verifyToken() {
   let token = getSecureCookie();

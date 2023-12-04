@@ -1,5 +1,3 @@
-
-// Hard-coded user ID for now
 import { verifyToken } from "./auth.js";
 let userId;
 
@@ -10,6 +8,13 @@ try {
 } catch (error) {
     console.error("Error:", error.message);
 }
+document.getElementById('role').addEventListener("click", () => {editField("role");})
+document.getElementById('contact').addEventListener("click", () => {editField("contact");})
+document.getElementById('address').addEventListener("click", () => {editField("address");})
+document.getElementById('permAddress').addEventListener("click", () => {editField("permAddress");})
+document.getElementById('email').addEventListener("click", () => {editField("email");})
+document.getElementById('birthday').addEventListener("click", () => {editField("birthday");})
+document.getElementById('wage').addEventListener("click", () => {editField("wage");})
 
 // Function to handle editing fields
 function editField(field) {

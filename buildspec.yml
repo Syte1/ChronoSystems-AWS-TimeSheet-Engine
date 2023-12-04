@@ -23,6 +23,7 @@ artifacts:
     - html/*
     - appspec.yml
     - scripts/**/*
+    - js/admin/*
     - styles/*
     - html/admin/*
   discard-paths: no
