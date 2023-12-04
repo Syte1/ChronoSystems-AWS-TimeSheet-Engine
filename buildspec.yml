@@ -23,6 +23,7 @@ artifacts:
     - html/*
     - appspec.yml
     - scripts/**/*
+    - styles/*
   discard-paths: no
 
 cache:
