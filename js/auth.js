@@ -118,7 +118,7 @@ export async function signUp(userDetails) {
 }
 
 function setSecureCookie(name, value, expires = 3600) {
-  document.cookie = `${name}=${value}; ${expires} ;Secure`;
+  document.cookie = `${name}=${value}; ${expires}`;
 }
 
 /*
